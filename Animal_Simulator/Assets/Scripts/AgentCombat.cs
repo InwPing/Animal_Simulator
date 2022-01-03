@@ -6,7 +6,6 @@ public class AgentCombat : MonoBehaviour
 {
 
    // public Animator animator;
-
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
@@ -23,16 +22,13 @@ public class AgentCombat : MonoBehaviour
     void Attack()
     {
 
-       // animator.SetTrigger("Attack");
-
-        
+       // animator.SetTrigger("Attack");        
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-
 
         foreach (Collider enemy in hitEnemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(20);
-            // Debug.Log("we hit " + emeny.name);
+            Debug.Log("we hit " + enemy.name);
         }
     }
 
