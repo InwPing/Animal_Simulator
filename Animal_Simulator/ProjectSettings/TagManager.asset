@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - target
-  - Undefined
-  - ag_Rabbit
-  - ag_Wolf
-  - ag_WildBoar
-  - obj_Glass
+  - Herbivore
+  - Carnivore
+  - Omnivore
+  - 1
+  - Plant
+  - Build
   layers:
   - Default
   - TransparentFX
@@ -46,4 +47,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 2203146061
     locked: 0

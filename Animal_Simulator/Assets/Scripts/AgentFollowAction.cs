@@ -5,20 +5,13 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
     [TaskCategory("AgentSystem")]
     public class AgentFollowAction : Action
     {
-        [Tooltip("Tag for target objects")]
         public SharedString tag;
-        [Tooltip("The speed of the agent")]
         public SharedFloat speed;
-        [Tooltip("Search area")]
         public SharedFloat search;
-        [Tooltip("Touched distance")]
         public SharedFloat touchedDist;
-
 
         private GameObject[] targetObjects;
         private Vector3 prevDir;
-
-
 
         public override void OnStart()
         {
@@ -26,7 +19,6 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 
             targetObjects = GameObject.FindGameObjectsWithTag(tag.Value);
         }
-
         
         public override TaskStatus OnUpdate()
         {

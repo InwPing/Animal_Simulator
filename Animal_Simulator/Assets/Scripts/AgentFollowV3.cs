@@ -6,30 +6,20 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
     [TaskCategory("AgentSystem")]
     public class AgentFollowV3 : Action
     {
-        [Tooltip("Tag for target objects")]
         public SharedString tag;
-        [Tooltip("The speed of the agent")]
         public SharedFloat speed;
-        [Tooltip("Search area")]
         public SharedFloat search;
-        [Tooltip("Touched distance")]
         public SharedFloat touchedDist;
-
 
         private GameObject[] targetObjects;
         private Vector3 prevDir;
-
-
 
         public override void OnStart()
         {
             base.OnStart();
 
-            targetObjects = GameObject.FindGameObjectsWithTag(tag.Value);
-            
+            targetObjects = GameObject.FindGameObjectsWithTag(tag.Value);         
         }
-
-
         
         public override TaskStatus OnUpdate()
         {
@@ -60,7 +50,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 Vector3 currentPos = transform.position;
 
                 Vector3 toward = targetPos - currentPos;
-                if (toward.magnitude < touchedDist.Value)
+                if (toward.magnitude <= touchedDist.Value)
                 {
                     var destroyGameObject = GetDefaultGameObject(closest);
                     GameObject.DestroyImmediate(destroyGameObject, true);

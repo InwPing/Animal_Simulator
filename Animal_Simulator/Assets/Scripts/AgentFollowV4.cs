@@ -4,76 +4,58 @@ using System.Collections;
 namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 {
     [TaskCategory("AgentSystem")]
-    public class AgentFollowV4 : Action         // follow with Tag and Layer
+    public class AgentFollowV4 : Action
     {
-        [Tooltip("Tag for target objects")]
         public SharedString tag;
-        [Tooltip("The speed of the agent")]
+        public SharedFloat fieldOfViewAngle = 360;
         public SharedFloat speed;
-        [Tooltip("Search area")]
         public SharedFloat search;
-        [Tooltip("Touched distance")]
         public SharedFloat touchedDist;
-
-        public SharedInt layer;
-
 
         private GameObject[] targetObjects;
         private Vector3 prevDir;
 
-
-
         public override void OnStart()
         {
             base.OnStart();
-
-            //targetObjects = GameObject.FindGameObjectsWithTag(tag.Value);
-
+            targetObjects = GameObject.FindGameObjectsWithTag(tag.Value);
         }
-
-
 
         public override TaskStatus OnUpdate()
         {
-            GameObject[] TargetTags;
-            TargetTags = GameObject.FindGameObjectsWithTag(tag.Value);
+            GameObject[] gos;
+            gos = GameObject.FindGameObjectsWithTag(tag.Value);
 
             GameObject closest = null;
             float distance = Mathf.Infinity;
             Vector3 position = transform.position; // this obj position
-            foreach (GameObject TargetTag in TargetTags)
+            foreach (GameObject go in gos)
             {
-                Debug.Log("TargetTag Layer = " + TargetTag.layer); // ++ 
-
-
-                Vector3 diff = TargetTag.transform.position - position;
+                Vector3 diff = go.transform.position - position;
                 float curDistance = diff.sqrMagnitude;
                 if (curDistance < distance)
                 {
-                    closest = TargetTag;
+                    closest = go;
                     distance = curDistance;
                 }
             }
-
-            //Debug.Log(closest);
-
+            //Debug.Log("closest = " + closest);
 
             Vector3 dir = Vector3.zero;
-            if (closest != null && closest.layer == layer.Value) // ++ 
+
+            if (closest != null)
             {
                 Vector3 targetPos = closest.transform.position;
                 Vector3 currentPos = transform.position;
-
                 Vector3 toward = targetPos - currentPos;
-                if (toward.magnitude < touchedDist.Value)
+                if (toward.magnitude <= touchedDist.Value)
                 {
+                    Debug.Log(" EAT " + closest.name);
                     var destroyGameObject = GetDefaultGameObject(closest);
                     GameObject.DestroyImmediate(destroyGameObject, true);
 
-
                     return TaskStatus.Success;
                 }
-
                 if (toward.magnitude < search.Value)
                 {
                     dir += toward;
@@ -81,26 +63,33 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             }
 
             dir.Normalize();
-
             dir = dir * speed.Value * Time.deltaTime;
-
             dir = Vector3.Lerp(prevDir, dir, 0.2f);
-
             transform.position += dir;
-
             prevDir = dir;
 
-
             return TaskStatus.Running;
-
         }
 
         public override void OnReset()
         {
             base.OnReset();
-
         }
 
+        public override void OnDrawGizmos()
+        {
+#if UNITY_EDITOR
+            var oldColor = UnityEditor.Handles.color;
+            var color = Color.yellow;
+            color.a = 0.1f;
+            UnityEditor.Handles.color = color;
 
+            var halfFOV = fieldOfViewAngle.Value * 0.5f;
+            var beginDirection = Quaternion.AngleAxis(-halfFOV, Vector3.up) * Owner.transform.forward;
+            UnityEditor.Handles.DrawSolidArc(Owner.transform.position, Owner.transform.up, beginDirection, fieldOfViewAngle.Value, search.Value);
+
+            UnityEditor.Handles.color = oldColor;
+#endif
+        }
     }
 }

@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+//using BehaviorDesigner.Runtime;
+
+
 
 public class Enemy : MonoBehaviour
 {
+    // function : Start, Update, TakeDamage, Eat, Hungry, Die, OnCollisionEnter, 
+    
     public int maxHealth = 100;
     public int currentHealth;
-
     public int maxHungryPoint = 100;
     public int currentHungryPoint;
 
+    private static int z;
     private float time;
 
     void Start()
@@ -19,19 +25,19 @@ public class Enemy : MonoBehaviour
         currentHungryPoint = maxHungryPoint;
     }
 
-    void Update()
+    void Update() // update hungrypoint every 1 second / hungrypoint -1 every 5 second
     {
         time += Time.deltaTime;
-        int IntTime = Mathf.RoundToInt(time);
-        if (IntTime % 5 == 0)
+        int IntTime = Mathf.RoundToInt(time); // float time to int time
+        if (IntTime % 2 == 0)
         {
             Hungry();
             time = 1;
         }
     }
 
-    public void TakeDamage(int damage)
-    {  
+    public void TakeDamage(int damage) // damage from AgentCombat Script
+    {
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
@@ -39,7 +45,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         Debug.Log("Die I SUS");
     }
@@ -47,9 +53,21 @@ public class Enemy : MonoBehaviour
     void Hungry()
     {
         currentHungryPoint -= 1;
-
-        //if currentHungryPoint > 80 dont eat
-        //if currentHungryPoint < 80 eat plant only
-        //if currentHungryPoint < 50 eat both of plant & animal
     }
+
+    void Eat()
+    {
+        currentHungryPoint += 1000;
+        //currentHealth += eatPoint/3;
+    }
+
+    private void OnTriggerEnter(Collider collider)  // cheack for eat
+    {
+        if (collider.gameObject.tag == "Plant")
+        {
+            Debug.Log("Die I SUS");
+            Eat();
+        }
+
+    }    
 }

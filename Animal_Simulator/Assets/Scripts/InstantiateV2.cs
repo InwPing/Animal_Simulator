@@ -22,6 +22,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject
 
         private int genNum;
 
+        
 
         private static int x;
 
@@ -35,17 +36,18 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject
             {
                 genNum = Gen.Value;
             }
-            Debug.Log("genNum" + genNum);
+           // Debug.Log("genNum" + genNum);
         }
 
         public override TaskStatus OnUpdate()
         {
             x = Counter.y;
+           // Debug.Log(" x = " + x);
 
             Vector3 thisPosition = transform.position;
-            if ( x /7 == 0)
+            if ( (x+1) %4 == 0)
             {
-                //Vector3 thisPosition = transform.position;
+                
                 for (int i = 0; i < genNum; i++)
                 {
                     storeResult.Value = GameObject.Instantiate(targetGameObject.Value, thisPosition, rotation.Value) as GameObject;

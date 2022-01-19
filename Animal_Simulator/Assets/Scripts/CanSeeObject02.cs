@@ -37,9 +37,11 @@ namespace BehaviorDesigner.Runtime.Tasks.Tutorials
                     // Return success if an object was found
                     return TaskStatus.Success;
                 }
+            
             }
             // An object is not within sight so return failure
-            return TaskStatus.Failure;
+            //return TaskStatus.Failure; 
+            return TaskStatus.Running;
         }
 
         /// <summary>

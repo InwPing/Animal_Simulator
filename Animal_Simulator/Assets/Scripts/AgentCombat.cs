@@ -9,6 +9,7 @@ public class AgentCombat : MonoBehaviour
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
+    public int attack;
 
 
     void Update()
@@ -27,7 +28,7 @@ public class AgentCombat : MonoBehaviour
 
         foreach (Collider enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(20);
+            enemy.GetComponent<Enemy>().TakeDamage(attack);
             Debug.Log("we hit " + enemy.name);
         }
     }

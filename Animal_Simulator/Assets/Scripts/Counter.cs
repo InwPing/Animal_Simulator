@@ -10,6 +10,7 @@ public class Counter : MonoBehaviour
 	public TextMesh counterText;
 	public static int y;   // send y to instantiateV2
 
+
 	void Start()
 	{
 		
