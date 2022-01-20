@@ -21,7 +21,10 @@ public class AgentController : MonoBehaviour
         for (int i = 0; i < number_ag1; i++)
         {
             GameObject instanceAgentA = (GameObject)Instantiate(prefab_ag1);
-            instanceAgentA.transform.position = new Vector3(Random.Range(-size.x * 10f, size.x * 10f), size.y, Random.Range(-size.z * 10f, size.z * 10f));
+            instanceAgentA.transform.position = new Vector3
+                (Random.Range(-size.x * 10f, size.x * 10f), 
+                size.y, 
+                Random.Range(-size.z * 10f, size.z * 10f));
 
         }
 

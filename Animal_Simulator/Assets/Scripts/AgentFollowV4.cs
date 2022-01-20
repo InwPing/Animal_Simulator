@@ -51,8 +51,8 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 if (toward.magnitude <= touchedDist.Value)
                 {
                     Debug.Log(" EAT " + closest.name);
-                    var destroyGameObject = GetDefaultGameObject(closest);
-                    GameObject.DestroyImmediate(destroyGameObject, true);
+                    //var destroyGameObject = GetDefaultGameObject(closest);
+                   // GameObject.DestroyImmediate(destroyGameObject, true);
 
                     return TaskStatus.Success;
                 }

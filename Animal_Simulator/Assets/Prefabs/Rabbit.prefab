@@ -285,8 +285,8 @@ GameObject:
   - component: {fileID: 2948901211371056949}
   - component: {fileID: 5106167810095613600}
   - component: {fileID: 3159152488388867764}
-  - component: {fileID: 6081689617675330134}
   - component: {fileID: -8934695307472711809}
+  - component: {fileID: -6872871737796948174}
   m_Layer: 7
   m_Name: Rabbit
   m_TagString: Herbivore
@@ -490,22 +490,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   behaviorTree: {fileID: 2948901211371056949}
   counterText: {fileID: 6203883007187307760}
---- !u!114 &6081689617675330134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2948901211371056957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee214c3d3dce1448abd44e947f1a3a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  maxHungryPoint: 100
-  currentHungryPoint: 0
 --- !u!54 &-8934695307472711809
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -522,6 +506,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6872871737796948174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2948901211371056957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee214c3d3dce1448abd44e947f1a3a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  maxHungryPoint: 80
+  currentHungryPoint: 0
+  NumberOfMeat: 3
+  Meat: {fileID: 6347577218206672780, guid: 09154c84d686b4040824005b7f997172, type: 3}
 --- !u!1 &3024262704972408845
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +744,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 720446571455731560}
-  Hungry: 0
 --- !u!1 &5864774214416673209
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,7 +848,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 8463591592690137152}
-  Health: 0
 --- !u!1 &7361175431047402076
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,11 +6,13 @@ using System;
 
 public class testCave : MonoBehaviour
 {
-    public Collider a;
+    [SerializeField] Collider a;
 
     void Start()
     {
         a = GetComponent<Collider>();
+
+    
     }
 
     void Update()

@@ -5,23 +5,22 @@ using UnityEngine.UI;
 
 public class HungryBar : MonoBehaviour
 {
-    public Slider slider;
-    Enemy enemy;
-
-    public int Hungry;
-
-    private float time;
+    [SerializeField] Slider slider;
+    [SerializeField] Enemy x;
+    //Enemy enemy;
 
     void Start()
     {
+        Enemy x = gameObject.GetComponent<Enemy>();
         //Find
         slider = GetComponent<Slider>();
-        enemy = FindObjectOfType<Enemy>();
+       // enemy = FindObjectOfType<Enemy>();
     }
 
     void Update()
     {
-        Hungry = enemy.currentHungryPoint;
+        int Hungry = x.currentHungryPoint;
         slider.value = Hungry;
+        slider.maxValue = x.maxHungryPoint;
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 public class AgentCombat : MonoBehaviour
 {
 
-   // public Animator animator;
-    public Transform attackPoint;
-    public float attackRange = 0.5f;
-    public LayerMask enemyLayers;
-    public int attack;
+    // public Animator animator;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float attackRange = 0.5f;
+    [SerializeField] LayerMask enemyLayers;
+    [SerializeField] int attack;
 
 
     void Update()
@@ -22,7 +22,6 @@ public class AgentCombat : MonoBehaviour
 
     void Attack()
     {
-
        // animator.SetTrigger("Attack");        
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 

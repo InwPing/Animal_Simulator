@@ -8,8 +8,6 @@ public class HealthBar : MonoBehaviour
     public Slider slider;
     Enemy enemy;
 
-    public int Health;
-
     void Start()
     {
         //Find
@@ -19,7 +17,7 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {
-        Health = enemy.currentHealth;
+        int Health = enemy.currentHealth;
         slider.value = Health;
     }
 }

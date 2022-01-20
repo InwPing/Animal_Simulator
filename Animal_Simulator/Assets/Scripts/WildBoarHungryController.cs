@@ -8,7 +8,7 @@ using System;
 
 public class WildBoarHungryController : MonoBehaviour
 {
-     public Enemy enemy;
+    [SerializeField] Enemy enemy;
     
     void Start()
     {
