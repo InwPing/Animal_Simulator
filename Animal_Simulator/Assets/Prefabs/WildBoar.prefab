@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 5196099189045602138}
-  Hungry: 0
+  enemy: {fileID: 3133860754459251963}
 --- !u!1 &3080766756630567978
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,10 +629,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee214c3d3dce1448abd44e947f1a3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 80
   currentHealth: 0
-  maxHungryPoint: 100
+  maxHungryPoint: 80
   currentHungryPoint: 0
+  Meat: {fileID: 0}
+  time: 0
 --- !u!54 &8965303053794475626
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -905,7 +907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 787668610383298096}
-  Health: 0
+  enemy: {fileID: 3133860754459251963}
 --- !u!1 &7490332045081848736
 GameObject:
   m_ObjectHideFlags: 0

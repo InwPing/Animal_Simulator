@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
-    Enemy enemy;
+    [SerializeField] Slider slider;
+    [SerializeField] Enemy enemy;
 
     void Start()
     {
-        //Find
+        Enemy enemy = gameObject.GetComponent<Enemy>();
         slider = GetComponent<Slider>();
-        enemy = FindObjectOfType<Enemy>();
     }
 
     void Update()
     {
         int Health = enemy.currentHealth;
         slider.value = Health;
+        slider.maxValue = enemy.maxHealth;
     }
 }

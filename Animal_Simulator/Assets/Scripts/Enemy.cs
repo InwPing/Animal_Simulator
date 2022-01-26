@@ -11,17 +11,17 @@ using System;
 public class Enemy : MonoBehaviour
 {
     // function : Start, Update, TakeDamage, Eat, Hungry, Die, OnCollisionEnter, 
-    
-    public int maxHealth;
-    public int currentHealth;
+
+    [SerializeField] public int maxHealth;
+    [SerializeField] public int currentHealth;
     private int minHealth = 0;
 
-    public int maxHungryPoint;
-    public int currentHungryPoint;
+    [SerializeField] public int maxHungryPoint;
+    [SerializeField] public int currentHungryPoint;
     private int minHungryPoint = 0;
 
-    public int NumberOfMeat =3;
-    [SerializeField] private GameObject Meat = null;
+    private int NumberOfMeat = 3;
+    [SerializeField] public GameObject Meat = null;
 
 
     [SerializeField] private static int z;
@@ -47,22 +47,39 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage) // damage from AgentCombat Script
     {
         currentHealth -= damage;
-        //if (currentHealth <= minHealth)
+
+        if (currentHealth < minHealth)
         {
-        //    currentHealth = minHealth;
+            currentHealth = minHealth;
+            DropMeat();
             Die();
         }
     }
 
+    public void GetHeal(int healthPoint)
+    {
+        currentHealth += healthPoint;
+        currentHungryPoint += 10;
+
+        Debug.Log("we can get heal");
+
+        /*if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        if(currentHungryPoint >= maxHungryPoint)
+        {
+            currentHungryPoint = maxHungryPoint;
+
+            Debug.Log("we can get heal");
+        }*/
+
+    }
+
     public void Die()
     {
-        //drop meat
-        Vector3 thisPosition = transform.position;
-        GameObject rawMeat = (GameObject)Instantiate(Meat);
-        for (int i = 0; i < NumberOfMeat; i++)
-        {
-            rawMeat.transform.position = new Vector3(Random.Range(thisPosition.x + 3, thisPosition.x - 3), thisPosition.y, Random.Range(thisPosition.z + 3, thisPosition.z - 3));
-        }
+        Destroy(gameObject);
     }
 
     void Hungry()
@@ -88,5 +105,15 @@ public class Enemy : MonoBehaviour
             Eat();
         }
 
-    }    
+    }
+    void DropMeat()
+    {
+        Vector3 thisPosition = transform.position;
+        //GameObject rawMeat = (GameObject)Instantiate(Meat);
+        for (int i = 0; i < NumberOfMeat; i++)
+        {
+            GameObject rawMeat = (GameObject)Instantiate(Meat);
+            rawMeat.transform.position = new Vector3(Random.Range(thisPosition.x + 2, thisPosition.x - 2), thisPosition.y, Random.Range(thisPosition.z + 2, thisPosition.z - 2));
+        }
+    }
 }
