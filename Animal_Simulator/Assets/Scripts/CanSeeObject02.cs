@@ -28,20 +28,21 @@ namespace BehaviorDesigner.Runtime.Tasks.Tutorials
             if (!string.IsNullOrEmpty(targetTag.Value))
             {
                 //returnedObject.Value = WithinSight(targetObject.Value, fieldOfViewAngle.Value, viewDistance.Value);
-                GameObject X = GameObject.FindGameObjectWithTag(targetTag.Value);
-                returnedObject.Value = WithinSight(X, fieldOfViewAngle.Value, viewDistance.Value);
-
-
-                if (returnedObject.Value != null)
+                GameObject[] X = GameObject.FindGameObjectsWithTag(targetTag.Value);
+                foreach (GameObject a in X)
                 {
-                    // Return success if an object was found
-                    return TaskStatus.Success;
-                }
-            
+                    returnedObject.Value = WithinSight(a, fieldOfViewAngle.Value, viewDistance.Value);
+
+                    if (returnedObject.Value != null)
+                    {
+                        // Return success if an object was found
+                        return TaskStatus.Success;
+                    }
+                }                          
             }
             // An object is not within sight so return failure
-            //return TaskStatus.Failure; 
-            return TaskStatus.Running;
+            return TaskStatus.Failure; 
+           // return TaskStatus.Running;
         }
 
         /// <summary>

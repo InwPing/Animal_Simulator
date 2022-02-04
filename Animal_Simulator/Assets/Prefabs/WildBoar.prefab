@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 8965303053794475626}
   m_Layer: 7
   m_Name: WildBoar
-  m_TagString: Omnivore
+  m_TagString: 2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -21,5 +21,4 @@ public class Counter : MonoBehaviour
 		counterText.text = behaviorTree.GetVariable("Count").GetValue().ToString();
 		y = Convert.ToInt32(counterText.text);
 	}
-
 }

@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6173933577606738337}
   m_Layer: 7
   m_Name: WolfNeo
-  m_TagString: Carnivore
+  m_TagString: 2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8050582415221761167}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf0c3da386721ea4b90711beab22425f, type: 3}
   m_Name: 

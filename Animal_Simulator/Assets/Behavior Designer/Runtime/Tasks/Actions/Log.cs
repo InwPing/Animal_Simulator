@@ -37,5 +37,10 @@ namespace BehaviorDesigner.Runtime.Tasks
             logError = false;
             logTime = false;
         }
+        
+        void testKuy(int x)
+        {
+            Debug.Log(x);
+        }
     }
 }

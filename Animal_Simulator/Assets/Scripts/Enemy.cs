@@ -10,7 +10,6 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    // function : Start, Update, TakeDamage, Eat, Hungry, Die, OnCollisionEnter, 
 
     [SerializeField] public int maxHealth;
     [SerializeField] public int currentHealth;
@@ -42,44 +41,38 @@ public class Enemy : MonoBehaviour
             Hungry();
             time = 1;
         }
+        if (currentHealth >= maxHealth) // check currentHealth dont over maxHealth
+        {
+            currentHealth = maxHealth;
+        }
+        if (currentHungryPoint >= maxHungryPoint) // check currentHungryPoint dont over maxHungryPoint
+        {
+            currentHungryPoint = maxHungryPoint;
+        }
+        Die();
     }
 
     public void TakeDamage(int damage) // damage from AgentCombat Script
     {
         currentHealth -= damage;
-
-        if (currentHealth < minHealth)
-        {
-            currentHealth = minHealth;
-            DropMeat();
-            Die();
-        }
     }
 
-    public void GetHeal(int healthPoint)
+    public void Eat(int healthPoint)
     {
         currentHealth += healthPoint;
         currentHungryPoint += 10;
 
-        Debug.Log("we can get heal");
-
-        /*if (currentHealth >= maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-
-        if(currentHungryPoint >= maxHungryPoint)
-        {
-            currentHungryPoint = maxHungryPoint;
-
-            Debug.Log("we can get heal");
-        }*/
-
+        Debug.Log("we can get heal");       
     }
 
     public void Die()
     {
-        Destroy(gameObject);
+        if (currentHealth <= minHealth)
+        {
+            currentHealth = minHealth;
+            Destroy(gameObject);
+            DropMeat();
+        }
     }
 
     void Hungry()
@@ -91,25 +84,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Eat()
-    {
-        currentHungryPoint += 40;
-        //currentHealth += currentHungryPoint / 3;
-    }
-
-    private void OnTriggerEnter(Collider collider)  // cheack for eat
-    {
-        if (collider.gameObject.tag == "Plant")
-        {
-            Debug.Log("Die I SUS");
-            Eat();
-        }
-
-    }
     void DropMeat()
     {
         Vector3 thisPosition = transform.position;
-        //GameObject rawMeat = (GameObject)Instantiate(Meat);
         for (int i = 0; i < NumberOfMeat; i++)
         {
             GameObject rawMeat = (GameObject)Instantiate(Meat);

@@ -11,8 +11,8 @@ public class testCave : MonoBehaviour
     void Start()
     {
         a = GetComponent<Collider>();
+        a.isTrigger = false;
 
-    
     }
 
     void Update()
@@ -28,16 +28,16 @@ public class testCave : MonoBehaviour
             Debug.Log("KeyCode.Up");
         }
     }
-    
+
 
     private void OnTriggerEnter(Collider collider)  // cheack for eat
     {
-        if (collider.gameObject.tag == "Herbivore")
+        if (collider.gameObject.tag == "1")
         {
             Debug.Log("Herbivore");
             a.isTrigger = true;
         }
-        if (collider.gameObject.tag == "Carnivore")
+        if (collider.gameObject.tag == "2")
         {
             Debug.Log("Carnivore");
             a.isTrigger = false;

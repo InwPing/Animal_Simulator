@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6119430949009516591}
   - component: {fileID: 1861042172691128369}
   - component: {fileID: 6393736234207767491}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,6 +149,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
+  attack: 0
 --- !u!54 &1861042172691128369
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -214,7 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3370736508244453822}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

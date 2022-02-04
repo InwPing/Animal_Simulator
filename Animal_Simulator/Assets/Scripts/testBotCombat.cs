@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentCombat : MonoBehaviour
+public class testBotCombat : MonoBehaviour
 {
 
     // public Animator animator;
@@ -11,34 +11,38 @@ public class AgentCombat : MonoBehaviour
     [SerializeField] LayerMask enemyLayers;
     [SerializeField] public int attack;
 
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Attack();
-        }
+
     }
 
     void Attack()
     {
-       // animator.SetTrigger("Attack");        
+        // animator.SetTrigger("Attack");        
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
-        foreach (Collider a in hitEnemies)
+        foreach (Collider enemy in hitEnemies)
         {
-            a.GetComponent<Enemy>().TakeDamage(attack);
-            //Debug.Log("we hit " + enemy.name);
+            enemy.GetComponent<testPlantStatus>().TakeDamage(attack);
         }
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "Grass")
+        {
+            Attack();
+        }
+
     }
 
     void OnDrawGizmosSelected()
     {
-        if(attackPoint == null)
+        if (attackPoint == null)
         {
             return;
         }
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
+    }    
 }

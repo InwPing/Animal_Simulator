@@ -5,12 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - target
-  - Herbivore
-  - Carnivore
-  - Omnivore
-  - 1
-  - Plant
   - Build
+  - 0
+  - 1
+  - 2
+  - 3
+  - Grass
+  - Herbivore
+  - Omnivore
+  - Carnivore
   layers:
   - Default
   - TransparentFX
@@ -20,8 +23,8 @@ TagManager:
   - UI
   - BaseLayer
   - Enemies
-  - 
-  - 
+  - Plants
+  - Building
   - 
   - 
   - 

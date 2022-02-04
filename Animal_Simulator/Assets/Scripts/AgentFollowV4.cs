@@ -1,66 +1,128 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
+using UnityEditor;
 
 namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 {
     [TaskCategory("AgentSystem")]
     public class AgentFollowV4 : Action
     {
-        public SharedString tag;
-        public SharedFloat fieldOfViewAngle = 360;
+        private SharedString tag;
+        private SharedString enemyTag;
         public SharedFloat speed;
         public SharedFloat search;
         public SharedFloat touchedDist;
+        public SharedFloat fieldOfViewAngle = 360;
 
         private GameObject[] targetObjects;
+        private GameObject[] myObjects;
+        private GameObject[] enemyTags;
         private Vector3 prevDir;
+
+        private int x;
+        private int y;
+        private string a;
+        private string b;
+
+        public SharedString Mytag;
+        public float colliderRange;
+        public LayerMask enemyLayers;
+
 
         public override void OnStart()
         {
             base.OnStart();
-            targetObjects = GameObject.FindGameObjectsWithTag(tag.Value);
+            search = colliderRange;
         }
 
         public override TaskStatus OnUpdate()
         {
-            GameObject[] gos;
-            gos = GameObject.FindGameObjectsWithTag(tag.Value);
 
             GameObject closest = null;
-            float distance = Mathf.Infinity;
-            Vector3 position = transform.position; // this obj position
-            foreach (GameObject go in gos)
-            {
-                Vector3 diff = go.transform.position - position;
-                float curDistance = diff.sqrMagnitude;
-                if (curDistance < distance)
-                {
-                    closest = go;
-                    distance = curDistance;
-                }
-            }
-            //Debug.Log("closest = " + closest);
+            GameObject closestEnemy = null;
 
+            float distance = Mathf.Infinity;
+            float z = Mathf.Infinity;
+
+            Vector3 position = transform.position;
             Vector3 dir = Vector3.zero;
 
-            if (closest != null)
+            Vector3 thisObjPos = transform.position;
+            Collider[] hitObj = Physics.OverlapSphere(thisObjPos, colliderRange, enemyLayers);
+            foreach (Collider enemy in hitObj)
+            {
+                a = Mytag.Value;
+                x = Convert.ToInt32(a);
+
+
+                b = enemy.tag;
+                y = Convert.ToInt32(b);
+
+                if (x > y) // 1 0
+                {
+                    tag = b;
+                    GameObject[] tags;
+                    tags = GameObject.FindGameObjectsWithTag(tag.Value);
+                    foreach (GameObject tag in tags)
+                    {
+                        Vector3 difftag = tag.transform.position - position;
+                        float curDistancetag = difftag.sqrMagnitude;
+                        if (curDistancetag < distance)
+                        {
+                            closest = tag;
+                            distance = curDistancetag;
+                        }
+                    }
+                }
+                if (x < y) // 1 2
+                {
+                    enemyTag = b;
+                    GameObject[] ETags;
+                    ETags = GameObject.FindGameObjectsWithTag(enemyTag.Value);
+                    foreach (GameObject ETag in ETags)
+                    {
+                        Vector3 diffETag = ETag.transform.position - position;
+                        float curDistanceETag = diffETag.sqrMagnitude;
+                        if (curDistanceETag < z)
+                        {
+                            closestEnemy = ETag;
+                            z = curDistanceETag;
+                        }
+                    }
+                }
+            }
+
+            if ((closest != null) || (closestEnemy != null))
             {
                 Vector3 targetPos = closest.transform.position;
                 Vector3 currentPos = transform.position;
                 Vector3 toward = targetPos - currentPos;
+
+                if (closestEnemy != null)
+                {
+                    Vector3 enemyPos = closestEnemy.transform.position;
+                    Vector3 x = enemyPos - currentPos;
+                    if (x.magnitude < search.Value)
+                    {
+                        return TaskStatus.Failure;
+                    }
+                }
                 if (toward.magnitude <= touchedDist.Value)
                 {
-                    Debug.Log(" EAT " + closest.name);
-                    //var destroyGameObject = GetDefaultGameObject(closest);
-                   // GameObject.DestroyImmediate(destroyGameObject, true);
-
                     return TaskStatus.Success;
                 }
-                if (toward.magnitude < search.Value)
+                if (toward.magnitude <= search.Value)
                 {
                     dir += toward;
                 }
             }
+            if ((closest == null) || (closestEnemy != null))
+            {
+                return TaskStatus.Failure;
+            }
+
 
             dir.Normalize();
             dir = dir * speed.Value * Time.deltaTime;
@@ -92,4 +154,5 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 #endif
         }
     }
+
 }

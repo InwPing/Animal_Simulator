@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heal: 20
   attackPoint: {fileID: 5235489713533328093}
-  attackRange: 1
+  attackRange: 0.5
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128

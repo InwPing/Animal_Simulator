@@ -1,24 +1,17 @@
 using UnityEngine;
+using System.Collections;
 
 namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 {
     [TaskCategory("AgentSystem")]
     public class RunAway : Action
     {
-        [Tooltip("Tag for target objects")]
         public SharedString tag;
-        [Tooltip("The speed of the agent")]
         public SharedFloat speed;
-        [Tooltip("Search area")]
-        public SharedFloat search;
-        [Tooltip("Touched distance")]
-        public SharedFloat touchedDist;
-
+        public SharedFloat runRange;
 
         private GameObject[] targetObjects;
         private Vector3 prevDir;
-
-
 
         public override void OnStart()
         {
@@ -27,27 +20,44 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             targetObjects = GameObject.FindGameObjectsWithTag(tag.Value);
         }
 
-
         public override TaskStatus OnUpdate()
         {
-            Vector3 dir = Vector3.zero;
+            GameObject[] gos;
+            gos = GameObject.FindGameObjectsWithTag(tag.Value);
 
-            foreach (GameObject targetObject in targetObjects)
+            GameObject closest = null;
+            float distance = Mathf.Infinity;
+            Vector3 position = transform.position; // this obj position
+            foreach (GameObject go in gos)
             {
-                Vector3 targetPos = targetObject.transform.position;
-                Vector3 currentPos = transform.position; // this obj position
+                Vector3 diff = go.transform.position - position;
+                float curDistance = diff.sqrMagnitude;
+                if (curDistance < distance)
+                {
+                    closest = go;
+                    distance = curDistance;
+                }
+            }
+
+            //Debug.Log("closest = " + closest);
+
+
+            Vector3 dir = Vector3.zero;
+            if (closest != null)
+            {
+                Vector3 targetPos = closest.transform.position;
+                Vector3 currentPos = transform.position;
 
                 Vector3 toward = targetPos - currentPos;
-                if (toward.magnitude > search.Value)
+
+                if(toward.magnitude > runRange.Value)
                 {
                     return TaskStatus.Success;
                 }
-
-                if (toward.magnitude < search.Value)
-                {
-                    dir += toward;
-                }
+                else dir -= toward;
+                
             }
+
             dir.Normalize();
 
             dir = dir * speed.Value * Time.deltaTime;
@@ -68,5 +78,6 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             base.OnReset();
 
         }
+
     }
 }

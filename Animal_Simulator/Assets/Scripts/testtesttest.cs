@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class testtesttest : MonoBehaviour
 {
-    public GameObject one;
+
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float colliderRange = 0.5f;
+    [SerializeField] LayerMask enemyLayers;
+
+    [SerializeField] GameObject one;
     void Start()
     {
         /*
@@ -16,14 +21,14 @@ public class testtesttest : MonoBehaviour
         */
 
 
-        testLayer();
-        testTag();
+      // testLayer();
+       // testTag();
     }
     
 
     void Update()
     {
-
+        MeatIsEaten();
     }
 
     void testLayer()
@@ -53,5 +58,28 @@ public class testtesttest : MonoBehaviour
         string a = gameObject.tag;
         Convert.ToInt32(a);
         Debug.Log(Convert.ToInt32(a)+2);
+    }
+
+    void MeatIsEaten()
+    {
+        Collider[] hitObj = Physics.OverlapSphere(attackPoint.position, colliderRange, enemyLayers);
+        Debug.Log("waiting for crash");
+        foreach (Collider enemy in hitObj)
+        {
+            Debug.Log(enemy.transform.position);
+            Debug.Log(enemy.tag);
+            Debug.Log(enemy.name);
+
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(attackPoint.position, colliderRange);
     }
 }
