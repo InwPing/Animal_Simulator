@@ -33,8 +33,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         {
             Vector3 thisObjPos = transform.position;
 
-            //Collider[] hitObj = Physics.OverlapSphere(thisObjPos, fieldOfViewAngle.Value, search.Value);
-            
+
             Collider[] hitObj = Physics.OverlapSphere(thisObjPos, colliderRange, enemyLayers);
             foreach (Collider enemy in hitObj)
             {

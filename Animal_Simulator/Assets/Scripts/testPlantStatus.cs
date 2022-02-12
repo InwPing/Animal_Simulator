@@ -15,36 +15,31 @@ public class testPlantStatus : MonoBehaviour
     [SerializeField] public int currentHealth;
     private int minHealth = 0;
 
-    private int NumberOfitem = 3;
-    [SerializeField] public GameObject Item = null;
+    //private int NumberOfitem = 3;
+    //[SerializeField] public GameObject Item = null;
+
+    [SerializeField] public int heal = 20;
+    [SerializeField] Transform eatenPoint;
+    [SerializeField] float colliderRange = 2f;
+    [SerializeField] LayerMask enemyLayers;
+
 
     void Start()
     {
         currentHealth = maxHealth;
     }
 
-    void Update() // update hungrypoint every 1 second / hungrypoint -1 every 5 second
+    void Update()
     {
-    
-        Die();
+        IsEaten();
     }
 
-    public void TakeDamage(int damage) // damage from AgentCombat Script
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
     }
-         
-    public void Die()
-    {
-        if (currentHealth <= minHealth)
-        {
-            currentHealth = minHealth;
-            Destroy(gameObject);
-            DropItem();
-        }
-    }
 
-    void DropItem()
+    /*void DropItem()
     {
         Vector3 thisPosition = transform.position;
         for (int i = 0; i < NumberOfitem; i++)
@@ -52,5 +47,34 @@ public class testPlantStatus : MonoBehaviour
             GameObject item = (GameObject)Instantiate(Item);
             item.transform.position = new Vector3(Random.Range(thisPosition.x + 2, thisPosition.x - 2), thisPosition.y, Random.Range(thisPosition.z + 2, thisPosition.z - 2));
         }
+    }*/
+
+    void IsEaten()
+    {
+        Collider[] hitObj = Physics.OverlapSphere(eatenPoint.position, colliderRange, enemyLayers);
+        if (currentHealth < minHealth)
+        {
+            currentHealth = 0;
+            if (currentHealth == 0)
+            {
+                foreach (Collider enemy in hitObj)
+                {
+                    enemy.GetComponent<Enemy>().Eat(heal);
+
+                    Destroy(gameObject);
+
+                }
+            }
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (eatenPoint == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(eatenPoint.position, colliderRange);
     }
 }

@@ -22,27 +22,27 @@ public class WildBoarHungryController : MonoBehaviour
 
     void HungryController()
     {
-        BehaviorTree[] A = GetComponents<BehaviorTree>();   // stack behavoirTree in array A
-        for (int i = 0; i < A.Length; i++)
+        BehaviorTree[] behaviorTree = GetComponents<BehaviorTree>();   // stack behavoirTree in array A
+        for (int i = 0; i < behaviorTree.Length; i++)
 
             if (enemy.currentHungryPoint >= 80)
             {
-                A[0].enabled = true;
-                Debug.Log(A[0]);
+                behaviorTree[0].enabled = true;
+                //Debug.Log(behaviorTree[0]);
 
             }
             else if ((50 < enemy.currentHungryPoint) && (enemy.currentHungryPoint < 80)) //eat plant only
             {
-                A[0].enabled = false;
-                A[1].enabled = true;
-                Debug.Log(A[1]);
+                behaviorTree[0].enabled = false;
+                behaviorTree[1].enabled = true;
+                //Debug.Log(behaviorTree[1]);
             }
             else if ((0 < enemy.currentHungryPoint) && (enemy.currentHungryPoint <= 50)) // eat both of plant & animal
             {
-                A[0].enabled = false;
-                A[1].enabled = false;
-                A[2].enabled = true;
-                Debug.Log(A[2]);
+                behaviorTree[0].enabled = false;
+                behaviorTree[1].enabled = false;
+                behaviorTree[2].enabled = true;
+                //Debug.Log(behaviorTree[2]);               
             }
             else if (enemy.currentHungryPoint <= 0)
             {

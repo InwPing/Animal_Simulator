@@ -39,7 +39,7 @@ public class testCave : MonoBehaviour
         }
         if (collider.gameObject.tag == "2")
         {
-            Debug.Log("Carnivore");
+            Debug.Log("hello guy");
             a.isTrigger = false;
         }
     }

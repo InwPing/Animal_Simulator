@@ -57,12 +57,12 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
     }
 
-    public void Eat(int healthPoint)
+    public void Eat(int healPoint)
     {
-        currentHealth += healthPoint;
-        currentHungryPoint += 10;
+        currentHealth += 5;
+        currentHungryPoint += healPoint;
 
-        Debug.Log("we can get heal");       
+       // Debug.Log("we can get heal");       
     }
 
     public void Die()
@@ -81,9 +81,9 @@ public class Enemy : MonoBehaviour
         if (currentHungryPoint <= minHungryPoint)
         {
             currentHungryPoint = minHungryPoint;
+            //Destroy(gameObject);
         }
     }
-
     void DropMeat()
     {
         Vector3 thisPosition = transform.position;

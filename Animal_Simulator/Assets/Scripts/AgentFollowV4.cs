@@ -16,9 +16,6 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         public SharedFloat touchedDist;
         public SharedFloat fieldOfViewAngle = 360;
 
-        private GameObject[] targetObjects;
-        private GameObject[] myObjects;
-        private GameObject[] enemyTags;
         private Vector3 prevDir;
 
         private int x;
@@ -113,7 +110,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 {
                     return TaskStatus.Success;
                 }
-                if (toward.magnitude <= search.Value)
+                if (toward.magnitude < search.Value)
                 {
                     dir += toward;
                 }

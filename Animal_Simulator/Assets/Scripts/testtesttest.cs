@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +28,7 @@ public class testtesttest : MonoBehaviour
 
     void Update()
     {
-        MeatIsEaten();
+        //MeatIsEaten();
     }
 
     void testLayer()
@@ -67,12 +67,22 @@ public class testtesttest : MonoBehaviour
         foreach (Collider enemy in hitObj)
         {
             Debug.Log(enemy.transform.position);
+            Debug.Log(enemy.transform.rotation);
             Debug.Log(enemy.tag);
             Debug.Log(enemy.name);
 
         }
     }
 
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "1")
+
+        {
+            Debug.Log("Won");
+            //Destroy(col.gameObject);
+        }
+    }
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null)

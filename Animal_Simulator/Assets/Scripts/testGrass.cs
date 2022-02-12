@@ -5,7 +5,7 @@ using UnityEngine;
 public class testGrass : MonoBehaviour  // meat can heal obj that collider;
 {
     [SerializeField] public int heal = 20;
-    [SerializeField] Transform attackPoint;
+    [SerializeField] Transform eatenPoint;
     [SerializeField] float colliderRange = 0.5f;
     [SerializeField] LayerMask enemyLayers;
 
@@ -20,7 +20,7 @@ public class testGrass : MonoBehaviour  // meat can heal obj that collider;
 
     void IsEaten()
     {
-        Collider[] hitObj = Physics.OverlapSphere(attackPoint.position, colliderRange, enemyLayers);
+        Collider[] hitObj = Physics.OverlapSphere(eatenPoint.position, colliderRange, enemyLayers);
 
         foreach (Collider enemy in hitObj)
         {
@@ -31,11 +31,11 @@ public class testGrass : MonoBehaviour  // meat can heal obj that collider;
 
     void OnDrawGizmosSelected()
     {
-        if (attackPoint == null)
+        if (eatenPoint == null)
         {
             return;
         }
 
-        Gizmos.DrawWireSphere(attackPoint.position, colliderRange);
+        Gizmos.DrawWireSphere(eatenPoint.position, colliderRange);
     }
 }

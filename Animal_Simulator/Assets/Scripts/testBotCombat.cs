@@ -10,10 +10,19 @@ public class testBotCombat : MonoBehaviour
     [SerializeField] float attackRange = 0.5f;
     [SerializeField] LayerMask enemyLayers;
     [SerializeField] public int attack;
+    //[SerializeField] private string targetTag;
+
+
+
+    void Start()
+    {
+
+    }
 
     void Update()
     {
-
+    
+        Attack();
     }
 
     void Attack()
@@ -25,15 +34,6 @@ public class testBotCombat : MonoBehaviour
         {
             enemy.GetComponent<testPlantStatus>().TakeDamage(attack);
         }
-    }
-
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (collider.gameObject.tag == "Grass")
-        {
-            Attack();
-        }
-
     }
 
     void OnDrawGizmosSelected()

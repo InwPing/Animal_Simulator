@@ -17,7 +17,6 @@ public class AgentController : MonoBehaviour
        // Debug.Log(size);
         Vector3 Pos = transform.position;
 
-
         for (int i = 0; i < number_ag1; i++)
         {
             GameObject instanceAgentA = (GameObject)Instantiate(prefab_ag1);
