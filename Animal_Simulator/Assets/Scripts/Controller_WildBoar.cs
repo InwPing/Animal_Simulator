@@ -6,13 +6,14 @@ using BehaviorDesigner.Runtime;
 using System;
 
 
-public class WildBoarHungryController : MonoBehaviour
+public class Controller_WildBoar : MonoBehaviour
 {
+
     [SerializeField] Enemy enemy;
     
     void Start()
     {
-       // enemy = GetComponent<Enemy>();
+
     }
 
     void Update() // update hungrypoint every 1 second / hungrypoint -1 every 5 second
@@ -28,6 +29,8 @@ public class WildBoarHungryController : MonoBehaviour
             if (enemy.currentHungryPoint >= 80)
             {
                 behaviorTree[0].enabled = true;
+                behaviorTree[1].enabled = false;
+                behaviorTree[2].enabled = false;
                 //Debug.Log(behaviorTree[0]);
 
             }
@@ -35,7 +38,7 @@ public class WildBoarHungryController : MonoBehaviour
             {
                 behaviorTree[0].enabled = false;
                 behaviorTree[1].enabled = true;
-                //Debug.Log(behaviorTree[1]);
+                behaviorTree[2].enabled = false;
             }
             else if ((0 < enemy.currentHungryPoint) && (enemy.currentHungryPoint <= 50)) // eat both of plant & animal
             {
@@ -44,9 +47,6 @@ public class WildBoarHungryController : MonoBehaviour
                 behaviorTree[2].enabled = true;
                 //Debug.Log(behaviorTree[2]);               
             }
-            else if (enemy.currentHungryPoint <= 0)
-            {
-                enemy.Die();
-            }
+
     }
 }

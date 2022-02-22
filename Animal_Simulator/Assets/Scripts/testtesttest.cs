@@ -21,10 +21,10 @@ public class testtesttest : MonoBehaviour
         */
 
 
-      // testLayer();
-       // testTag();
+        // testLayer();
+        // testTag();
     }
-    
+
 
     void Update()
     {
@@ -57,7 +57,7 @@ public class testtesttest : MonoBehaviour
         Debug.Log(gameObject.tag);
         string a = gameObject.tag;
         Convert.ToInt32(a);
-        Debug.Log(Convert.ToInt32(a)+2);
+        Debug.Log(Convert.ToInt32(a) + 2);
     }
 
     void MeatIsEaten()

@@ -13,7 +13,6 @@ public class testPlantStatus : MonoBehaviour
 
     [SerializeField] public int maxHealth;
     [SerializeField] public int currentHealth;
-    private int minHealth = 0;
 
     //private int NumberOfitem = 3;
     //[SerializeField] public GameObject Item = null;
@@ -31,12 +30,22 @@ public class testPlantStatus : MonoBehaviour
 
     void Update()
     {
-        IsEaten();
+        Collider[] hitObj = Physics.OverlapSphere(eatenPoint.position, colliderRange, enemyLayers);
+
+        foreach (Collider enemy in hitObj)//if (currentHealth <= 0)
+        {
+            if (currentHealth <= 0)
+            {
+                enemy.GetComponent<Enemy>().Eat(heal);
+
+                Destroy(gameObject);
+            }
+        }
     }
 
     public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
+    {      
+        currentHealth -= damage;    
     }
 
     /*void DropItem()
@@ -48,25 +57,6 @@ public class testPlantStatus : MonoBehaviour
             item.transform.position = new Vector3(Random.Range(thisPosition.x + 2, thisPosition.x - 2), thisPosition.y, Random.Range(thisPosition.z + 2, thisPosition.z - 2));
         }
     }*/
-
-    void IsEaten()
-    {
-        Collider[] hitObj = Physics.OverlapSphere(eatenPoint.position, colliderRange, enemyLayers);
-        if (currentHealth < minHealth)
-        {
-            currentHealth = 0;
-            if (currentHealth == 0)
-            {
-                foreach (Collider enemy in hitObj)
-                {
-                    enemy.GetComponent<Enemy>().Eat(heal);
-
-                    Destroy(gameObject);
-
-                }
-            }
-        }
-    }
 
     void OnDrawGizmosSelected()
     {

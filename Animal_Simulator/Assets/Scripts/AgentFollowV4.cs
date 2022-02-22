@@ -9,8 +9,10 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
     [TaskCategory("AgentSystem")]
     public class AgentFollowV4 : Action
     {
-        private SharedString tag;
-        private SharedString enemyTag;
+        public SharedString Mytag;
+        public float colliderRange;
+        public LayerMask enemyLayers;
+
         public SharedFloat speed;
         public SharedFloat search;
         public SharedFloat touchedDist;
@@ -22,11 +24,8 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         private int y;
         private string a;
         private string b;
-
-        public SharedString Mytag;
-        public float colliderRange;
-        public LayerMask enemyLayers;
-
+        private SharedString tag;
+        private SharedString enemyTag;
 
         public override void OnStart()
         {
@@ -43,7 +42,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             float distance = Mathf.Infinity;
             float z = Mathf.Infinity;
 
-            Vector3 position = transform.position;
+
             Vector3 dir = Vector3.zero;
 
             Vector3 thisObjPos = transform.position;
@@ -64,7 +63,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                     tags = GameObject.FindGameObjectsWithTag(tag.Value);
                     foreach (GameObject tag in tags)
                     {
-                        Vector3 difftag = tag.transform.position - position;
+                        Vector3 difftag = tag.transform.position - thisObjPos;
                         float curDistancetag = difftag.sqrMagnitude;
                         if (curDistancetag < distance)
                         {
@@ -80,7 +79,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                     ETags = GameObject.FindGameObjectsWithTag(enemyTag.Value);
                     foreach (GameObject ETag in ETags)
                     {
-                        Vector3 diffETag = ETag.transform.position - position;
+                        Vector3 diffETag = ETag.transform.position - thisObjPos;
                         float curDistanceETag = diffETag.sqrMagnitude;
                         if (curDistanceETag < z)
                         {

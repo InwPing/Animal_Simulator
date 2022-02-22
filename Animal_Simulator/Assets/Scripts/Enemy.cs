@@ -10,26 +10,45 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
+    private Enemy enemy;
+    private GameObject a;
 
     [SerializeField] public int maxHealth;
     [SerializeField] public int currentHealth;
-    private int minHealth = 0;
+
 
     [SerializeField] public int maxHungryPoint;
     [SerializeField] public int currentHungryPoint;
-    private int minHungryPoint = 0;
+
 
     private int NumberOfMeat = 3;
     [SerializeField] public GameObject Meat = null;
 
 
-    [SerializeField] private static int z;
+    //[SerializeField] private static int z;
     [SerializeField] private float time;
+    [SerializeField] private int count = 0;
+
+
+    [SerializeField] public string Name;
+    [SerializeField] public GameObject agent;
+
+    private Quaternion rotation = Quaternion.identity;
+    private GameObject storeResult;
+    private Vector3 genPos;
+
+    public bool randomGen = false;
+    private int genNum;
+    private int Gen = 1;
+    private int randomGenMin = 1;
+    private int randomGenMax = 2;
 
     void Start()
     {
+        gameObject.name = Name;
         currentHealth = maxHealth;
         currentHungryPoint = maxHungryPoint;
+       
     }
 
     void Update() // update hungrypoint every 1 second / hungrypoint -1 every 5 second
@@ -49,7 +68,18 @@ public class Enemy : MonoBehaviour
         {
             currentHungryPoint = maxHungryPoint;
         }
-        Die();
+
+        if (currentHungryPoint < 0)
+        {
+            currentHungryPoint = 0;
+        }
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+            Destroy(gameObject);
+            DropMeat();
+        }
+
     }
 
     public void TakeDamage(int damage) // damage from AgentCombat Script
@@ -61,36 +91,58 @@ public class Enemy : MonoBehaviour
     {
         currentHealth += 5;
         currentHungryPoint += healPoint;
-
-       // Debug.Log("we can get heal");       
-    }
-
-    public void Die()
-    {
-        if (currentHealth <= minHealth)
-        {
-            currentHealth = minHealth;
-            Destroy(gameObject);
-            DropMeat();
-        }
+        count += 1;      
     }
 
     void Hungry()
     {
         currentHungryPoint -= 1;
-        if (currentHungryPoint <= minHungryPoint)
+        if (currentHungryPoint <= 0)
         {
-            currentHungryPoint = minHungryPoint;
-            //Destroy(gameObject);
+            currentHungryPoint = 0;
+            Destroy(gameObject);
         }
     }
+
     void DropMeat()
     {
         Vector3 thisPosition = transform.position;
         for (int i = 0; i < NumberOfMeat; i++)
         {
             GameObject rawMeat = (GameObject)Instantiate(Meat);
-            rawMeat.transform.position = new Vector3(Random.Range(thisPosition.x + 2, thisPosition.x - 2), thisPosition.y, Random.Range(thisPosition.z + 2, thisPosition.z - 2));
+            rawMeat.transform.position = new Vector3(Random.Range(thisPosition.x + 2, thisPosition.x - 2), 0.5f, Random.Range(thisPosition.z + 2, thisPosition.z - 2));
         }
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {      
+        if ((collider.name.Contains(Name)))
+        {
+            GameObject other = collider.gameObject;
+            enemy = other.GetComponent<Enemy>();
+
+            if (count > 1)
+            {
+                if (enemy.count > 1)
+                {
+                    if (randomGen)
+                    {
+                        genNum = Random.Range(randomGenMin, randomGenMax);
+                    }
+                    else
+                    {
+                        genNum = Gen;
+                    }
+                    Debug.Log(genNum);
+                    Vector3 thisPos = transform.position;
+                    for (int i = 0; i < 1; i++)
+                    {
+                        count = 0;
+                        enemy.count = 0;
+                        storeResult = GameObject.Instantiate(agent, thisPos, rotation) as GameObject;
+                    }
+                }
+            }
+        }       
     }
 }

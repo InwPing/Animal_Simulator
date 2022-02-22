@@ -9,7 +9,33 @@ public class Meat : MonoBehaviour  // meat can heal obj that collider;
     [SerializeField] float colliderRange = 0.5f;
     [SerializeField] LayerMask enemyLayers;
 
-    void OnTriggerEnter(Collider collider)
+    [SerializeField] float speed = 5f;
+    [SerializeField] float pickUpDistance = 1.5f;
+
+    private Transform A;
+
+    void Update()
+    {
+        Collider[] hitObj = Physics.OverlapSphere(eatenPoint.position, colliderRange, enemyLayers);
+        foreach (Collider enemy in hitObj)
+        {
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distance > pickUpDistance)
+            {
+                return;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, enemy.transform.position, speed * Time.deltaTime);
+            if (distance < 0.5f)
+            {
+                enemy.GetComponent<Enemy>().Eat(heal);
+                Destroy(gameObject);
+            }
+        }
+
+
+    }
+
+    /*void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject)
         {
@@ -27,7 +53,7 @@ public class Meat : MonoBehaviour  // meat can heal obj that collider;
             enemy.GetComponent<Enemy>().Eat(heal);
             Debug.Log("we heal " + enemy.name);
         }
-    }
+    }*/
 
     void OnDrawGizmosSelected()
     {

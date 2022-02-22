@@ -1,64 +1,48 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEditor;
+
 namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 {
     [TaskCategory("AgentSystem")]
-    public class RunAway : Action
+    public class testRUN : Action
     {
-        public SharedString Mytag;
-        public float colliderRange;
-        public LayerMask enemyLayers;
-
+        public SharedString tag;
         public SharedFloat speed;
-        private SharedFloat runRange;
+        public SharedFloat runRange;
 
         private GameObject[] targetObjects;
         private Vector3 prevDir;
 
-        private int x;
-        private int y;
-        private string a;
-        private string b;
-
         public override void OnStart()
         {
             base.OnStart();
-            runRange = colliderRange;
+
+            targetObjects = GameObject.FindGameObjectsWithTag(tag.Value);
         }
 
         public override TaskStatus OnUpdate()
         {
-            Vector3 thisObjPos = transform.position;
-            Collider[] gos = Physics.OverlapSphere(thisObjPos, colliderRange, enemyLayers);
+            GameObject[] gos;
+            gos = GameObject.FindGameObjectsWithTag(tag.Value);
 
             GameObject closest = null;
             float distance = Mathf.Infinity;
 
-            foreach (Collider go in gos)
+            Vector3 position = transform.position; // this obj position
+            foreach (GameObject go in gos)
             {
-                a = Mytag.Value;
-                x = Convert.ToInt32(a);
-
-                b = go.tag;
-                y = Convert.ToInt32(b);
-
-                if (x < y)
+                Vector3 diff = go.transform.position - position;
+                float curDistance = diff.sqrMagnitude;
+                if (curDistance < distance)
                 {
-                    Vector3 diff = go.transform.position - thisObjPos;
-                    float curDistance = diff.sqrMagnitude;
-                    if (curDistance < distance)
-                    {
-                        //Debug.Log("53");
-                        closest = go.gameObject;
-                        distance = curDistance;
-                    }
-                }                  
+                    closest = go;
+                    distance = curDistance;
+                }
             }
 
-            //Debug.Log("61");
+            //Debug.Log("closest = " + closest);
+
+
             Vector3 dir = Vector3.zero;
             if (closest != null)
             {
@@ -66,14 +50,13 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 Vector3 currentPos = transform.position;
 
                 Vector3 toward = targetPos - currentPos;
-                //Debug.Log("70");
+
                 if (toward.magnitude > runRange.Value)
                 {
-                    //Debug.Log("success");
                     return TaskStatus.Success;
                 }
                 else dir -= toward;
-                //Debug.Log("77");
+
             }
 
             dir.Normalize();
@@ -82,7 +65,6 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             transform.position += dir;
             prevDir = dir;
 
-            //Debug.Log("87");
             return TaskStatus.Running;
 
         }

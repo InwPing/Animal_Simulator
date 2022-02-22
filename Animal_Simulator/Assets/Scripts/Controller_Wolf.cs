@@ -5,10 +5,11 @@ using UnityEngine.UI;
 using BehaviorDesigner.Runtime;
 using System;
 
-public class RabbitController : MonoBehaviour
+public class Controller_Wolf : MonoBehaviour
 {
 
     [SerializeField] Enemy enemy;
+
     void Start()
     {
         
@@ -18,26 +19,21 @@ public class RabbitController : MonoBehaviour
     {
         Controller();
     }
-
     void Controller()
     {
-        BehaviorTree[] behaviorTree = GetComponents<BehaviorTree>();   // stack behavoirTree in array A
+        BehaviorTree[] behaviorTree = GetComponents<BehaviorTree>();
         for (int i = 0; i < behaviorTree.Length; i++)
-            if(enemy.currentHungryPoint >= 90)
+            if (enemy.currentHungryPoint >= 90)
             {
-                //stay i n cave
                 behaviorTree[0].enabled = true;
                 behaviorTree[1].enabled = false;
+
             }
             else if (enemy.currentHungryPoint < 90)
             {
-                // eat wander;
                 behaviorTree[0].enabled = false;
                 behaviorTree[1].enabled = true;
-            }          
-            else if (enemy.currentHungryPoint <= 0)
-            {
-                enemy.Die();
+
             }
     }
 }
