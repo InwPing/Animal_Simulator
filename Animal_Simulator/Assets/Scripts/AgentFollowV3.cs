@@ -9,30 +9,18 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
     public class AgentFollowV3 : Action
     {
         public SharedString tag;
-        public SharedString enemyTag;
         public SharedFloat speed;
         public SharedFloat search;
         public SharedFloat touchedDist;
         public SharedFloat fieldOfViewAngle = 360;
 
         private GameObject[] targetObjects;
-        private GameObject[] myObjects;
-        private GameObject[] enemyTags;
         private Vector3 prevDir;
 
         public override void OnStart()
         {
             base.OnStart();
-
-            string a = gameObject.tag;
-            Convert.ToInt32(a);
-
-
-            targetObjects = GameObject.FindGameObjectsWithTag(tag.Value);
-            if(enemyTags != null) 
-            {
-                enemyTags = GameObject.FindGameObjectsWithTag(enemyTag.Value);
-            }
+            targetObjects = GameObject.FindGameObjectsWithTag(tag.Value);           
 
         }
         
@@ -40,15 +28,9 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         {
             GameObject[] tags;
             tags = GameObject.FindGameObjectsWithTag(tag.Value);
-            GameObject[] ETags;
-            ETags = GameObject.FindGameObjectsWithTag(enemyTag.Value);
-
-            GameObject closest = null;
-            GameObject closestEnemy = null;
-
+            
+            GameObject closest = null;          
             float distance = Mathf.Infinity;
-            float z = Mathf.Infinity;
-
             Vector3 position = transform.position;
             Vector3 dir = Vector3.zero;
 
@@ -63,36 +45,15 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 }                               
             }
 
-            foreach (GameObject ETag in ETags)
-            {
-                Vector3 diffETag = ETag.transform.position - position;
-                float curDistanceETag = diffETag.sqrMagnitude;
-                if (curDistanceETag < z)
-                {
-                    closestEnemy = ETag;
-                    z = curDistanceETag;
 
-                }
-            }
-
-            if ((closest != null) & ((closestEnemy != null) || (closestEnemy == null)))
+            if (closest != null) 
             {
                 Vector3 targetPos = closest.transform.position;
                 Vector3 currentPos = transform.position;
                 Vector3 toward = targetPos - currentPos;
-
-                if (closestEnemy != null)
-                {
-                    Vector3 enemyPos = closestEnemy.transform.position;
-                    Vector3 x = enemyPos - currentPos;
-                    if (x.magnitude < search.Value)
-                    {
-                        return TaskStatus.Failure;
-                    }
-                }
+               
                 if (toward.magnitude <= touchedDist.Value)
-                {
-                 
+                {                
                     return TaskStatus.Success;
                 }
                 if (toward.magnitude < search.Value)

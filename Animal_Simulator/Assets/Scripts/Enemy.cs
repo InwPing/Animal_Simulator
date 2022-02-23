@@ -27,11 +27,11 @@ public class Enemy : MonoBehaviour
 
     //[SerializeField] private static int z;
     [SerializeField] private float time;
-    [SerializeField] private int count = 0;
+    [SerializeField] public int meetingTime = 0;
 
 
     [SerializeField] public string Name;
-    [SerializeField] public GameObject agent;
+    //[SerializeField] public GameObject agent;
 
     private Quaternion rotation = Quaternion.identity;
     private GameObject storeResult;
@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
     private int Gen = 1;
     private int randomGenMin = 1;
     private int randomGenMax = 2;
+
 
     void Start()
     {
@@ -91,7 +92,8 @@ public class Enemy : MonoBehaviour
     {
         currentHealth += 5;
         currentHungryPoint += healPoint;
-        count += 1;      
+        meetingTime += 1;
+        Sex();
     }
 
     void Hungry()
@@ -114,16 +116,31 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
+    void Sex()
+    {
+        Vector3 thisPos = transform.position;
+        if (meetingTime >= 5)
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                GameObject O = (GameObject)Instantiate(gameObject);
+                O.transform.position = thisPos;
+            }
+                meetingTime = 0;
+            
+        }
+    }
+
+    /*private void OnTriggerEnter(Collider collider)
     {      
         if ((collider.name.Contains(Name)))
         {
             GameObject other = collider.gameObject;
             enemy = other.GetComponent<Enemy>();
 
-            if (count > 1)
+            if (meetingTime > 1)
             {
-                if (enemy.count > 1)
+                if (enemy.meetingTime > 1)
                 {
                     if (randomGen)
                     {
@@ -133,16 +150,16 @@ public class Enemy : MonoBehaviour
                     {
                         genNum = Gen;
                     }
-                    Debug.Log(genNum);
+
                     Vector3 thisPos = transform.position;
                     for (int i = 0; i < 1; i++)
                     {
-                        count = 0;
-                        enemy.count = 0;
+                        meetingTime = 0;
+                        enemy.meetingTime = 0;
                         storeResult = GameObject.Instantiate(agent, thisPos, rotation) as GameObject;
                     }
                 }
             }
         }       
-    }
+    }*/
 }

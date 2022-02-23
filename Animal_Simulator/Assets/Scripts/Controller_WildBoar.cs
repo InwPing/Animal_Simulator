@@ -24,29 +24,47 @@ public class Controller_WildBoar : MonoBehaviour
     void HungryController()
     {
         BehaviorTree[] behaviorTree = GetComponents<BehaviorTree>();   // stack behavoirTree in array A
-        for (int i = 0; i < behaviorTree.Length; i++)
+                                                                       //for (int i = 0; i < behaviorTree.Length; i++)
 
-            if (enemy.currentHungryPoint >= 80)
-            {
-                behaviorTree[0].enabled = true;
-                behaviorTree[1].enabled = false;
-                behaviorTree[2].enabled = false;
-                //Debug.Log(behaviorTree[0]);
+        if (enemy.meetingTime >= 3)
+        {
+            behaviorTree[0].enabled = false;
+            behaviorTree[1].enabled = false;
+            behaviorTree[2].enabled = false;
+            behaviorTree[3].enabled = true;
+        }
+        if (enemy.currentHungryPoint >= 200)
+        {
+            behaviorTree[0].enabled = true;
+            behaviorTree[1].enabled = false;
+            behaviorTree[2].enabled = false;
+            behaviorTree[3].enabled = false;
+            //Debug.Log(behaviorTree[0]);
 
-            }
-            else if ((50 < enemy.currentHungryPoint) && (enemy.currentHungryPoint < 80)) //eat plant only
-            {
-                behaviorTree[0].enabled = false;
-                behaviorTree[1].enabled = true;
-                behaviorTree[2].enabled = false;
-            }
-            else if ((0 < enemy.currentHungryPoint) && (enemy.currentHungryPoint <= 50)) // eat both of plant & animal
-            {
-                behaviorTree[0].enabled = false;
-                behaviorTree[1].enabled = false;
-                behaviorTree[2].enabled = true;
-                //Debug.Log(behaviorTree[2]);               
-            }
+        }
+        if ((120 < enemy.currentHungryPoint) && (enemy.currentHungryPoint < 200)) //eat plant only
+        {
+            behaviorTree[0].enabled = false;
+            behaviorTree[1].enabled = true;
+            behaviorTree[2].enabled = false;
+            behaviorTree[3].enabled = false;
+        }
+        if ((0 < enemy.currentHungryPoint) && (enemy.currentHungryPoint <= 120)) // eat both of plant & animal
+        {
+            behaviorTree[0].enabled = false;
+            behaviorTree[1].enabled = false;
+            behaviorTree[2].enabled = true;
+            behaviorTree[3].enabled = false;
+            //Debug.Log(behaviorTree[2]);               
+        }
+        if (enemy.currentHealth < 40)
+        {
+            behaviorTree[0].enabled = false;
+            behaviorTree[1].enabled = false;
+            behaviorTree[2].enabled = false;
+            behaviorTree[3].enabled = true;
+        }
+
 
     }
 }

@@ -25,6 +25,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         public override TaskStatus OnUpdate()
         {
             if (HasArrived()) {
+                Debug.Log("25");
                 return TaskStatus.Success;
             }
 

@@ -8,10 +8,9 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject
     {
     
         public SharedGameObject targetGameObject;       
-        public SharedVector3 position;
-        public SharedQuaternion rotation = Quaternion.identity;
+        private SharedQuaternion rotation = Quaternion.identity;
         [SharedRequired]       
-        public SharedGameObject storeResult;
+        private SharedGameObject storeResult;
 
 
         
@@ -61,7 +60,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject
         public override void OnReset()
         {
             targetGameObject = null;                   
-            position = Vector3.zero;
             rotation = Quaternion.identity;
 
             Gen = 1;

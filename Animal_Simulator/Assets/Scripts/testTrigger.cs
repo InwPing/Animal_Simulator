@@ -7,6 +7,9 @@ using UnityEditor;
 public class testTrigger : MonoBehaviour
 {
     [SerializeField] Collider thisCollider;
+    Enemy enemy;
+
+    [SerializeField] public GameObject prefab;
 
     [SerializeField] public string Name;
     [SerializeField] public string Mytag;
@@ -35,7 +38,7 @@ public class testTrigger : MonoBehaviour
     private float _timer;
     public float TimeIWantInSeconds = 10f;
 
-
+    public int timeYED;
 
 
     void Start()
@@ -57,7 +60,7 @@ public class testTrigger : MonoBehaviour
                 thisCollider.enabled = false;
                 if (thisCollider.enabled == false)
                 {
-                    foreach (GameObject agent in col)
+                    /*foreach (GameObject agent in col)
                     {
                         agent.SetActive(true);
 
@@ -66,9 +69,23 @@ public class testTrigger : MonoBehaviour
 
                         Destroy(agent);
                         col = new List<GameObject>();
+                        //Destroy(agent);
 
                         thisCollider.enabled = true;
+                    }*/
+                    for (int i = 0;i < col.Count; i++ )
+                    {
+                        
+                        GameObject O = (GameObject)Instantiate(prefab);
+                        O.transform.position = genPos;
+                        prefab.SetActive(true);
+                        //Destroy(prefab);
                     }
+
+                    col = new List<GameObject>();
+                    //Destroy(prefab);
+                    //DestroyImmediate(prefab, true);
+                    thisCollider.enabled = true;
                 }
                 _timer = 0;
                 TimerStarted = false;
@@ -78,6 +95,7 @@ public class testTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        //enemy = collider.GetComponent<Enemy>();
         x = Convert.ToInt32(Mytag);
 
         string b = collider.tag;
@@ -91,11 +109,23 @@ public class testTrigger : MonoBehaviour
                 n.name = Name;
                 _timer = 0;
                 TimerStarted = true;
-
-                Debug.Log(n.name);
+                enemy = collider.GetComponent<Enemy>();
                 n.GetComponent<GameObject>();
+                if (enemy.meetingTime > timeYED)
+                {
+                    enemy.meetingTime = 0;
+                    col.Add(n);
+
+                }
+                //n.name = Name;
+                //_timer = 0;
+                //TimerStarted = true;
+
+               // n.GetComponent<GameObject>();
                 col.Add(n);
                 n.SetActive(false);
+                Destroy(n);
+
 
 
             }

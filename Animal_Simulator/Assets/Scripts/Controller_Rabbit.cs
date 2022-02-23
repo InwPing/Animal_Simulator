@@ -23,26 +23,38 @@ public class Controller_Rabbit: MonoBehaviour
     void ControlRabbit()
     {
         BehaviorTree[] behaviorTree = GetComponents<BehaviorTree>();   // stack behavoirTree in array A
-        for (int i = 0; i < behaviorTree.Length; i++)
-            if(enemy.currentHungryPoint >= 90)
+        //for (int i = 0; i < behaviorTree.Length; i++)
+        //{
+            
+            if (enemy.meetingTime >= 3)
+            {
+                behaviorTree[0].enabled = false;
+                behaviorTree[1].enabled = false;
+                behaviorTree[2].enabled = true;
+            }
+
+            if (enemy.currentHungryPoint >= 90)
             {
                 //stay i n cave
                 behaviorTree[0].enabled = true;
                 behaviorTree[1].enabled = false;
                 behaviorTree[2].enabled = false;
             }
-            else if (enemy.currentHungryPoint < 90)
+
+            if (enemy.currentHungryPoint < 90)
             {
                 // eat wander;
                 behaviorTree[0].enabled = false;
                 behaviorTree[1].enabled = true;
                 behaviorTree[2].enabled = false;
-            }          
-            if (enemy.currentHealth < 30)
+            }
+
+            if (enemy.currentHealth < 40)
             {
                 behaviorTree[0].enabled = false;
                 behaviorTree[1].enabled = false;
                 behaviorTree[2].enabled = true;
             }
+        //}
     }
 }

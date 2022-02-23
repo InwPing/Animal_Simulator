@@ -14,6 +14,9 @@ TagManager:
   - Herbivore
   - Omnivore
   - Carnivore
+  - R_Build
+  - W_Build
+  - WB_Build
   layers:
   - Default
   - TransparentFX

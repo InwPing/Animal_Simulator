@@ -32,6 +32,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 Vector3 toward = targetPos - currentPos;
                 if (toward.magnitude < touchedDist.Value)
                 {
+                    Debug.Log("Success");
                     return TaskStatus.Success;
                 }                           
 

@@ -722,6 +722,7 @@ GameObject:
   - component: {fileID: 7510616633662159998}
   - component: {fileID: 2634907910602715307}
   - component: {fileID: 8920672716410174169}
+  - component: {fileID: -4915609567200915896}
   m_Layer: 7
   m_Name: WildBoar
   m_TagString: 2
@@ -875,13 +876,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   currentHealth: 0
-  maxHungryPoint: 100
+  maxHungryPoint: 240
   currentHungryPoint: 0
   Meat: {fileID: 1543187425221919526, guid: fa3912906995ff44c99f02719c3e316e, type: 3}
   time: 0
-  count: 0
+  meetingTime: 0
   Name: WildBoar
-  agent: {fileID: 7364755387003938069}
   randomGen: 1
 --- !u!114 &866319523990505359
 MonoBehaviour:
@@ -940,7 +940,7 @@ MonoBehaviour:
   resetValuesOnRestart: 0
   externalBehavior: {fileID: 11400000, guid: 665b315b83893a04cb99124d496708a4, type: 2}
   mBehaviorSource:
-    behaviorName: Behavior
+    behaviorName: WildBoar_0
     behaviorDescription: 
     mTaskData:
       types: []
@@ -980,7 +980,7 @@ MonoBehaviour:
   resetValuesOnRestart: 0
   externalBehavior: {fileID: 11400000, guid: 7996c2baee0233c4a98af8541cce381b, type: 2}
   mBehaviorSource:
-    behaviorName: Behavior
+    behaviorName: WildBoar_1
     behaviorDescription: 
     mTaskData:
       types: []
@@ -1020,7 +1020,47 @@ MonoBehaviour:
   resetValuesOnRestart: 0
   externalBehavior: {fileID: 11400000, guid: 0ad7f957fbfe83c4c97998d251696410, type: 2}
   mBehaviorSource:
-    behaviorName: Behavior
+    behaviorName: WildBoar_2
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: 
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects: []
+        byteData: 
+        byteDataArray: 
+      Version: 
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
+--- !u!114 &-4915609567200915896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7364755387003938069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  asynchronousLoad: 0
+  pauseWhenDisabled: 0
+  restartWhenComplete: 0
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 11400000, guid: 435d46572a03bef47b562c142e108e7e, type: 2}
+  mBehaviorSource:
+    behaviorName: WildBoar_3
     behaviorDescription: 
     mTaskData:
       types: []
