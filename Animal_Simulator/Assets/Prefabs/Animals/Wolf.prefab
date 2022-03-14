@@ -124,7 +124,9 @@ GameObject:
   - component: {fileID: 5746028473052580329}
   - component: {fileID: 9150516086441291917}
   - component: {fileID: 3636934218197544788}
+  - component: {fileID: 1756928681523231664}
   - component: {fileID: 3064027414356872383}
+  - component: {fileID: 5295523548731179093}
   m_Layer: 7
   m_Name: Wolf
   m_TagString: 3
@@ -263,15 +265,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee214c3d3dce1448abd44e947f1a3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Wolf
   maxHealth: 100
   currentHealth: 0
   maxHungryPoint: 300
   currentHungryPoint: 0
+  hungryTime: 1
   Meat: {fileID: 23256878733264632, guid: 7d508a9eb49f57842ad8c8ff009c6d3f, type: 3}
   time: 0
-  meetingTime: 0
-  Name: Wolf
-  randomGen: 1
+  timeClock: 0
+  timeReadyForSex: 15
+  countEat: 0
+  conditionSex: 6
+  minRandom: 0
+  maxRandom: 2
+  Clock: 0
+  functionCounterAttack: 0
 --- !u!114 &4057420735908756843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +298,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
-  attack: 1
+  attack: 20
 --- !u!114 &5746028473052580329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +306,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4046522280088220858}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -337,7 +346,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4046522280088220858}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -379,7 +388,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4046522280088220858}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -414,6 +423,46 @@ MonoBehaviour:
       Version: 1.6.8
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!114 &1756928681523231664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046522280088220858}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  asynchronousLoad: 0
+  pauseWhenDisabled: 0
+  restartWhenComplete: 0
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 11400000, guid: ffebd38bc1c451f478f156d9fb75da7e, type: 2}
+  mBehaviorSource:
+    behaviorName: Wolf_3
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects: []
+        byteData: 
+        byteDataArray: 
+      Version: 1.6.8
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!114 &3064027414356872383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +476,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 6714429573858355213}
+--- !u!114 &5295523548731179093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046522280088220858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d09d3478ceda0b4096a12a1cf3d3cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  age: 300
 --- !u!1 &4552708754188078129
 GameObject:
   m_ObjectHideFlags: 0

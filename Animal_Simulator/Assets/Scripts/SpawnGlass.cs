@@ -22,8 +22,6 @@ public class SpawnGlass : MonoBehaviour
     {
         time += Time.deltaTime;
         int y = Mathf.RoundToInt(time);
-        //Debug.Log(y);
-
         if ( y % timeToSpawn == 0)
         {
             Spawn();
@@ -33,9 +31,7 @@ public class SpawnGlass : MonoBehaviour
     public void Spawn()
     {
         Vector3 size = Plane_.transform.localScale;
-        Debug.Log(size);
-        Vector3 Pos = Plane_.transform.position;
-        Debug.Log(Pos);
+        Vector3 Pos = Plane_.transform.position;       
 
         for (int i = 0; i < numberAgent_; i++)
         {

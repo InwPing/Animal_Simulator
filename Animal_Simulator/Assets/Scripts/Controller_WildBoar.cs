@@ -26,12 +26,13 @@ public class Controller_WildBoar : MonoBehaviour
         BehaviorTree[] behaviorTree = GetComponents<BehaviorTree>();   // stack behavoirTree in array A
                                                                        //for (int i = 0; i < behaviorTree.Length; i++)
 
-        if (enemy.meetingTime >= 3)
+        if (enemy.countEat >= 3)
         {
             behaviorTree[0].enabled = false;
             behaviorTree[1].enabled = false;
             behaviorTree[2].enabled = false;
             behaviorTree[3].enabled = true;
+            behaviorTree[4].enabled = false;
         }
         if (enemy.currentHungryPoint >= 200)
         {
@@ -39,7 +40,16 @@ public class Controller_WildBoar : MonoBehaviour
             behaviorTree[1].enabled = false;
             behaviorTree[2].enabled = false;
             behaviorTree[3].enabled = false;
+            behaviorTree[4].enabled = false;
             //Debug.Log(behaviorTree[0]);
+            if (enemy.currentHealth >= ((80 / enemy.maxHealth) * 100))
+            {
+                behaviorTree[0].enabled = false;
+                behaviorTree[1].enabled = false;
+                behaviorTree[2].enabled = false;
+                behaviorTree[3].enabled = true;
+                behaviorTree[4].enabled = false;
+            }
 
         }
         if ((120 < enemy.currentHungryPoint) && (enemy.currentHungryPoint < 200)) //eat plant only
@@ -48,6 +58,7 @@ public class Controller_WildBoar : MonoBehaviour
             behaviorTree[1].enabled = true;
             behaviorTree[2].enabled = false;
             behaviorTree[3].enabled = false;
+            behaviorTree[4].enabled = false;
         }
         if ((0 < enemy.currentHungryPoint) && (enemy.currentHungryPoint <= 120)) // eat both of plant & animal
         {
@@ -55,16 +66,19 @@ public class Controller_WildBoar : MonoBehaviour
             behaviorTree[1].enabled = false;
             behaviorTree[2].enabled = true;
             behaviorTree[3].enabled = false;
+            behaviorTree[4].enabled = false;
             //Debug.Log(behaviorTree[2]);               
         }
-        if (enemy.currentHealth < 40)
+        if (enemy.currentHealth <= ((40/ enemy.maxHealth) * 100))
         {
             behaviorTree[0].enabled = false;
             behaviorTree[1].enabled = false;
             behaviorTree[2].enabled = false;
-            behaviorTree[3].enabled = true;
+            behaviorTree[3].enabled = false;
+
+            enemy.functionCounterAttack = true;
+            behaviorTree[4].enabled = true;
         }
-
-
+        
     }
 }

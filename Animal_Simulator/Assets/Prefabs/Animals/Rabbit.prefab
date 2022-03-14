@@ -435,6 +435,8 @@ GameObject:
   - component: {fileID: 6242956113498652397}
   - component: {fileID: 4812134840692264063}
   - component: {fileID: 756453780718974085}
+  - component: {fileID: 2348474869606902543}
+  - component: {fileID: 7553086655237507475}
   m_Layer: 7
   m_Name: Rabbit
   m_TagString: 1
@@ -587,15 +589,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee214c3d3dce1448abd44e947f1a3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Rabbit
   maxHealth: 200
   currentHealth: 0
   maxHungryPoint: 120
   currentHungryPoint: 0
+  hungryTime: 1
   Meat: {fileID: 6651033587098069460, guid: 96c61dd56a2364c4ba4595fd86a5a8d3, type: 3}
   time: 0
-  meetingTime: 0
-  Name: Rabbit
-  randomGen: 1
+  timeClock: 0
+  timeReadyForSex: 15
+  countEat: 0
+  conditionSex: 2
+  minRandom: 0
+  maxRandom: 2
+  Clock: 0
+  functionCounterAttack: 0
 --- !u!114 &8715625551013956320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,7 +622,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
-  attack: 4
+  attack: 20
 --- !u!114 &7537747143460582768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,6 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4491409802212996696}
+  RabbitBuildCave: {fileID: 2348474869606902543}
 --- !u!114 &6242956113498652397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,7 +644,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3901961148591494743}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -674,7 +684,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3901961148591494743}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -718,7 +728,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3901961148591494743}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -751,6 +761,40 @@ MonoBehaviour:
       Version: 
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!114 &2348474869606902543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3901961148591494743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a5ad57a27130145bc4d26d468456e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderRange: 40
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  Tag: R_Building
+  spaceAnotherCave: 30
+  timeClock: 0
+  Cave: {fileID: 363533085217256581, guid: 7a961b0b0f3bfe94ba9bb301582f87a2, type: 3}
+--- !u!114 &7553086655237507475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3901961148591494743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d09d3478ceda0b4096a12a1cf3d3cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  age: 100
 --- !u!1 &3977311869340864871
 GameObject:
   m_ObjectHideFlags: 0

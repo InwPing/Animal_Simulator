@@ -91,34 +91,41 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             }
 
             if ((closest != null) || (closestEnemy != null))
-            {
-                Vector3 targetPos = closest.transform.position;
+            {               
                 Vector3 currentPos = transform.position;
-                Vector3 toward = targetPos - currentPos;
+
+                if (closest != null)
+                {
+                    Vector3 targetPos = closest.transform.position;
+                    Vector3 toward = targetPos - currentPos;
+                    if (toward.magnitude <= touchedDist.Value)
+                    {
+                        return TaskStatus.Success;
+                    }
+                    if (toward.magnitude < search.Value)
+                    {
+                        dir += toward;
+                    }
+                }
 
                 if (closestEnemy != null)
                 {
                     Vector3 enemyPos = closestEnemy.transform.position;
                     Vector3 x = enemyPos - currentPos;
+                    if (x.magnitude <= touchedDist.Value)
+                    {
+                        return TaskStatus.Success;
+                    }
                     if (x.magnitude < search.Value)
                     {
-                        return TaskStatus.Failure;
+                        dir += x;
                     }
                 }
-                if (toward.magnitude <= touchedDist.Value)
-                {
-                    return TaskStatus.Success;
-                }
-                if (toward.magnitude < search.Value)
-                {
-                    dir += toward;
-                }
             }
-            if ((closest == null) || (closestEnemy != null))
+            if ((closest == null) && (closestEnemy == null))
             {
                 return TaskStatus.Failure;
             }
-
 
             dir.Normalize();
             dir = dir * speed.Value * Time.deltaTime;

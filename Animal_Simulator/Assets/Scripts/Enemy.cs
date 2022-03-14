@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -10,56 +10,55 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    private Enemy enemy;
-    private GameObject a;
+    [SerializeField] public string Name;
 
-    [SerializeField] public int maxHealth;
-    [SerializeField] public int currentHealth;
-
+    // Health & Hungry
+    [SerializeField] public float maxHealth;
+    [SerializeField] public float currentHealth;
 
     [SerializeField] public int maxHungryPoint;
     [SerializeField] public int currentHungryPoint;
+    [SerializeField] private int hungryTime;
 
-
+    // About Meat
+    [SerializeField] private GameObject Meat = null;
     private int NumberOfMeat = 3;
-    [SerializeField] public GameObject Meat = null;
 
+    // Timer
+    [SerializeField] private float time; // ใช้นับเวลาเฉยๆ
+    private float floatTime;
+    [SerializeField] private float timeClock;
+    [SerializeField] private float timeReadyForSex = 15.0f;
 
-    //[SerializeField] private static int z;
-    [SerializeField] private float time;
-    [SerializeField] public int meetingTime = 0;
+    // Sex()
+    [SerializeField] public int countEat = 0; 
+    [SerializeField] private int conditionSex = 0;
+    [SerializeField] private int minRandom = 0;
+    [SerializeField] private int maxRandom = 0;
 
+    [SerializeField] private bool Clock = false;
 
-    [SerializeField] public string Name;
-    //[SerializeField] public GameObject agent;
-
-    private Quaternion rotation = Quaternion.identity;
-    private GameObject storeResult;
-    private Vector3 genPos;
-
-    public bool randomGen = false;
-    private int genNum;
-    private int Gen = 1;
-    private int randomGenMin = 1;
-    private int randomGenMax = 2;
+    [SerializeField] public bool functionCounterAttack = false;
 
 
     void Start()
     {
         gameObject.name = Name;
         currentHealth = maxHealth;
-        currentHungryPoint = maxHungryPoint;
-       
+        currentHungryPoint = maxHungryPoint;    
     }
 
-    void Update() // update hungrypoint every 1 second / hungrypoint -1 every 5 second
+    void Update() 
     {
+        //TimeClock();
         time += Time.deltaTime;
-        int IntTime = Mathf.RoundToInt(time); // float time to int time
-        if (IntTime % 2 == 0) // time for hungry
+
+        floatTime += Time.deltaTime;
+        int intTime = Convert.ToInt32(floatTime);
+        if (intTime / hungryTime == 1) // time for hungry
         {
             Hungry();
-            time = 1;
+            floatTime = 0.0f;
         }
         if (currentHealth >= maxHealth) // check currentHealth dont over maxHealth
         {
@@ -85,15 +84,14 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage) // damage from AgentCombat Script
     {
-        currentHealth -= damage;
+        currentHealth -= damage * Time.deltaTime;
     }
 
     public void Eat(int healPoint)
     {
         currentHealth += 5;
         currentHungryPoint += healPoint;
-        meetingTime += 1;
-        Sex();
+        countEat += 1;
     }
 
     void Hungry()
@@ -116,50 +114,50 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Sex()
+    /*void Sex()
     {
-        Vector3 thisPos = transform.position;
-        if (meetingTime >= 5)
+        if (Clock == true)
         {
-            for (int i = 0; i < 1; i++)
+            int randomGenerate = Random.Range(minRandom, maxRandom);
+            Vector3 thisPos = transform.position;
+            if (countEat >= conditionSex)
             {
-                GameObject O = (GameObject)Instantiate(gameObject);
-                O.transform.position = thisPos;
-            }
-                meetingTime = 0;
-            
-        }
-    }
-
-    /*private void OnTriggerEnter(Collider collider)
-    {      
-        if ((collider.name.Contains(Name)))
-        {
-            GameObject other = collider.gameObject;
-            enemy = other.GetComponent<Enemy>();
-
-            if (meetingTime > 1)
-            {
-                if (enemy.meetingTime > 1)
+                for (int i = 0; i < randomGenerate; i++)
                 {
-                    if (randomGen)
-                    {
-                        genNum = Random.Range(randomGenMin, randomGenMax);
-                    }
-                    else
-                    {
-                        genNum = Gen;
-                    }
+                    countEat = 0;
 
-                    Vector3 thisPos = transform.position;
-                    for (int i = 0; i < 1; i++)
-                    {
-                        meetingTime = 0;
-                        enemy.meetingTime = 0;
-                        storeResult = GameObject.Instantiate(agent, thisPos, rotation) as GameObject;
-                    }
+                    GameObject O = (GameObject)Instantiate(gameObject);
+                    O.transform.position = thisPos;
+
+                    Clock = false;
                 }
             }
-        }       
+        }        
+    }
+    
+    void TimeClock()
+    {
+        timeClock += Time.deltaTime;
+        if (timeClock >= timeReadyForSex)
+        {
+            Clock = true;
+            Sex();
+            timeClock = 0.0f;
+        }
+        //else Clock = false;
     }*/
+
+    public void CounterAttack(GameObject Attacker)
+    {
+        if (functionCounterAttack == true)
+        {
+            int random = Random.Range(0, 2);
+            if (random == 1)
+            {
+                Attacker.GetComponent<Enemy>().TakeDamage(20);
+                //Debug.Log("Hit " + Attacker);
+            }
+        }
+        else return;
+    }
 }

@@ -1,4 +1,4 @@
- using System;
+﻿ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +11,9 @@ public class testtesttest : MonoBehaviour
     [SerializeField] LayerMask enemyLayers;
 
     [SerializeField] GameObject one;
+    [SerializeField] float HP = 100;
+    [SerializeField] float time = 60;
+
     void Start()
     {
         /*
@@ -20,14 +23,16 @@ public class testtesttest : MonoBehaviour
          Debug.Log(LayerMask.LayerToName(1 + 3));
         */
 
-
         // testLayer();
         // testTag();
     }
 
 
-    void Update()
+    void Update() // ผกดเผหกดเปผพเ้ก พเ้กะั้่กะ
     {
+        time -= Time.deltaTime;
+        HP -= 1* Time.deltaTime;
+
         //MeatIsEaten();
     }
 
@@ -92,4 +97,6 @@ public class testtesttest : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, colliderRange);
     }
+
+    
 }

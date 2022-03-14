@@ -1,0 +1,52 @@
+Login log 
+
+Login date : 14/3/2565 20:50:07
+Rabbit = 0
+Wildboar = 0
+Wolf = 0
+
+Login date : 14/3/2565 20:50:18
+Rabbit = 1
+Wildboar = 0
+Wolf = 0
+
+Login date : 14/3/2565 20:50:28
+Rabbit = 2
+Wildboar = 0
+Wolf = 0
+
+Login date : 14/3/2565 20:51:05
+Rabbit = 0
+Wildboar = 0
+Wolf = 0
+
+Login date : 14/3/2565 20:51:16
+Rabbit = 1
+Wildboar = 0
+Wolf = 0
+
+Login date : 14/3/2565 20:51:26
+Rabbit = 1
+Wildboar = 0
+Wolf = 0
+
+Login date : 14/3/2565 20:51:36
+Rabbit = 1
+Wildboar = 0
+Wolf = 0
+
+Login date : 14/3/2565 20:52:40
+Rabbit = 0
+Wildboar = 0
+Wolf = 0
+
+Login date : 14/3/2565 20:53:23
+Rabbit = 0
+Wildboar = 0
+Wolf = 0
+
+Login date : 14/3/2565 20:53:34
+Rabbit = 1
+Wildboar = 0
+Wolf = 0
+

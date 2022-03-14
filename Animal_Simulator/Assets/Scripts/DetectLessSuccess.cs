@@ -39,12 +39,6 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 string b = enemy.tag;
                 y = Convert.ToInt32(b);
 
-                /*if (x == y)
-                {
-                    returnTag.Value = enemy.tag;
-                    //Debug.Log("TaskStatus = Failure");
-                    return TaskStatus.Failure;
-                }*/
                 if (x < y)
                 {
                     returnTag.Value = enemy.tag;
@@ -61,8 +55,6 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 {
                     Debug.Log("nullllllllllll");
                 }
-                //Debug.Log("TaskStatus = Failure");
-                //return TaskStatus.Failure;
             }
             //Debug.Log("TaskStatus = Failure");
             return TaskStatus.Failure;

@@ -11,9 +11,6 @@ TagManager:
   - 2
   - 3
   - Grass
-  - Herbivore
-  - Omnivore
-  - Carnivore
   - R_Build
   - W_Build
   - WB_Build

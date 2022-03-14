@@ -23,27 +23,35 @@ public class Controller_Wolf : MonoBehaviour
     {
         BehaviorTree[] behaviorTree = GetComponents<BehaviorTree>();
         //for (int i = 0; i < behaviorTree.Length; i++)
-        //{
-            if (enemy.meetingTime >= 5)
+        if (enemy.countEat >= 5)
+        {
+            behaviorTree[0].enabled = false;
+            behaviorTree[1].enabled = false;
+            behaviorTree[2].enabled = true;
+            behaviorTree[3].enabled = false;
+        }
+
+        if (enemy.currentHungryPoint >= 200)
+        {
+            behaviorTree[0].enabled = true;
+            behaviorTree[1].enabled = false;
+            behaviorTree[2].enabled = false;
+            behaviorTree[3].enabled = false;
+        }
+
+        if (enemy.currentHungryPoint < 200)
+        {
+            behaviorTree[0].enabled = false;
+            behaviorTree[1].enabled = true;
+            behaviorTree[2].enabled = false;
+            behaviorTree[3].enabled = false;
+            if (enemy.currentHealth < (40 / enemy.maxHealth) * 100)
             {
                 behaviorTree[0].enabled = false;
                 behaviorTree[1].enabled = false;
-                behaviorTree[2].enabled = true;
-            }
-
-            if (enemy.currentHungryPoint >= 200)
-            {
-                behaviorTree[0].enabled = true;
-                behaviorTree[1].enabled = false;
                 behaviorTree[2].enabled = false;
+                behaviorTree[3].enabled = true;
             }
-            else if (enemy.currentHungryPoint < 200)
-            {
-                behaviorTree[0].enabled = false;
-                behaviorTree[1].enabled = true;
-                behaviorTree[2].enabled = false;
-
-            }
-        //}           
+        }
     }
 }

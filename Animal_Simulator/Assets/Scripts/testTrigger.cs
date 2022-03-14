@@ -111,9 +111,9 @@ public class testTrigger : MonoBehaviour
                 TimerStarted = true;
                 enemy = collider.GetComponent<Enemy>();
                 n.GetComponent<GameObject>();
-                if (enemy.meetingTime > timeYED)
+                if (enemy.countEat > timeYED)
                 {
-                    enemy.meetingTime = 0;
+                    enemy.countEat = 0;
                     col.Add(n);
 
                 }

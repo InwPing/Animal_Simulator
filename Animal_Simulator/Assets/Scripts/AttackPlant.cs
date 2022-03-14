@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using UnityEditor;
 
-public class testAttackAnimal : MonoBehaviour
+public class AttackPlant : MonoBehaviour
 {
 
     // public Animator animator;
@@ -22,7 +22,7 @@ public class testAttackAnimal : MonoBehaviour
     }
 
     void Update()
-    {
+    {  
         Attack();
     }
 
@@ -40,7 +40,7 @@ public class testAttackAnimal : MonoBehaviour
 
             if (x > y)
             {
-                enemy.GetComponent<Enemy>().TakeDamage(attack);
+                enemy.GetComponent<PlantStatus>().TakeDamage(attack);
             }
         }
     }
@@ -52,5 +52,5 @@ public class testAttackAnimal : MonoBehaviour
             return;
         }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
+    }    
 }

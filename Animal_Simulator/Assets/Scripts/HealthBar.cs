@@ -16,7 +16,7 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {
-        int Health = enemy.currentHealth;
+        float Health = enemy.currentHealth;
         slider.value = Health;
         slider.maxValue = enemy.maxHealth;
     }

@@ -18,7 +18,8 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject
 
         public override TaskStatus OnUpdate()
         {
-            storeResult.Value = GameObject.Instantiate(targetGameObject.Value, position.Value, rotation.Value) as GameObject;
+            Vector3 thisPosition = transform.position;
+            storeResult.Value = GameObject.Instantiate(targetGameObject.Value, thisPosition, rotation.Value) as GameObject;
 
             return TaskStatus.Success;
         }

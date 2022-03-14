@@ -8,7 +8,7 @@ using System;
 
 
 
-public class testPlantStatus : MonoBehaviour
+public class PlantStatus : MonoBehaviour
 {
 
     [SerializeField] public int maxHealth;
