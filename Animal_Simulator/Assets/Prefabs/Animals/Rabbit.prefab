@@ -598,12 +598,7 @@ MonoBehaviour:
   Meat: {fileID: 6651033587098069460, guid: 96c61dd56a2364c4ba4595fd86a5a8d3, type: 3}
   time: 0
   timeClock: 0
-  timeReadyForSex: 15
   countEat: 0
-  conditionSex: 2
-  minRandom: 0
-  maxRandom: 2
-  Clock: 0
   functionCounterAttack: 0
 --- !u!114 &8715625551013956320
 MonoBehaviour:

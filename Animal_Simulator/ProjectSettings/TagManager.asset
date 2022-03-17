@@ -14,6 +14,7 @@ TagManager:
   - R_Build
   - W_Build
   - WB_Build
+  - sprite
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Enemies
   - Plants
   - Building
-  - 
+  - Player
   - 
   - 
   - 

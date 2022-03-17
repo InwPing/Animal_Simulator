@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BehaviorDesigner.Runtime.Tasks.Movement
 {
@@ -27,21 +27,29 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         // There is no success or fail state with wander - the agent will just keep wandering
         public override TaskStatus OnUpdate()
         {
-            if (HasArrived()) {
+            if (HasArrived()) 
+            {
                 // The agent should pause at the destination only if the max pause duration is greater than 0
-                if (maxPauseDuration.Value > 0) {
-                    if (destinationReachTime == -1) {
+                if (maxPauseDuration.Value > 0) 
+                {
+                    if (destinationReachTime == -1) 
+                    {
                         destinationReachTime = Time.time;
                         pauseTime = Random.Range(minPauseDuration.Value, maxPauseDuration.Value);
                     }
-                    if (destinationReachTime + pauseTime <= Time.time) {
+                    if (destinationReachTime + pauseTime <= Time.time) 
+                    {
                         // Only reset the time if a destination has been set.
-                        if (TrySetTarget()) {
+                        if (TrySetTarget()) 
+                        {
                             destinationReachTime = -1;
                         }
                     }
-                } else {
+                } 
+                else 
+                {
                     TrySetTarget();
+                    Debug.Log("trysettarget 52");
                 }
             }
             return TaskStatus.Running;
@@ -53,14 +61,16 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
             var validDestination = false;
             var attempts = targetRetries.Value;
             var destination = transform.position;
-            while (!validDestination && attempts > 0) {
-                direction = direction + Random.insideUnitSphere * wanderRate.Value;
-                destination = transform.position + direction.normalized * Random.Range(minWanderDistance.Value, maxWanderDistance.Value);
-                validDestination = SamplePosition(destination);
+            while (!validDestination && attempts > 0) 
+            {
+                direction = direction + Random.insideUnitSphere * wanderRate.Value; // สุ่มจุด
+                destination = transform.forward + direction.normalized * Random.Range(minWanderDistance.Value, maxWanderDistance.Value); // เดินไปทิศนั้น
+                validDestination = SamplePosition(destination); // return bool True if the nearest point is found.
                 attempts--;
             }
-            if (validDestination) {
-                SetDestination(destination);
+            if (validDestination) 
+            {
+                SetDestination(destination); // return bool True if the destination was requested successfully, otherwise false.              
             }
             return validDestination;
         }

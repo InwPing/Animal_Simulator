@@ -28,15 +28,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float time; // ใช้นับเวลาเฉยๆ
     private float floatTime;
     [SerializeField] private float timeClock;
-    [SerializeField] private float timeReadyForSex = 15.0f;
+    //[SerializeField] private float timeReadyForSex = 15.0f;
 
     // Sex()
     [SerializeField] public int countEat = 0; 
-    [SerializeField] private int conditionSex = 0;
-    [SerializeField] private int minRandom = 0;
-    [SerializeField] private int maxRandom = 0;
+    //[SerializeField] private int conditionSex = 0;
+    //[SerializeField] private int minRandom = 0;
+    //[SerializeField] private int maxRandom = 0;
 
-    [SerializeField] private bool Clock = false;
+   // [SerializeField] private bool Clock = false;
 
     [SerializeField] public bool functionCounterAttack = false;
 

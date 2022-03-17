@@ -1,4 +1,4 @@
-﻿ using System;
+﻿//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +11,21 @@ public class testtesttest : MonoBehaviour
     [SerializeField] LayerMask enemyLayers;
 
     [SerializeField] GameObject one;
-    [SerializeField] float HP = 100;
-    [SerializeField] float time = 60;
+    private Vector3 thisPos;
+    public Vector3 tarPos;
+    private Vector3 direction;
+    private Vector3 destination;
+
+    public float time;
 
     void Start()
     {
+        direction = transform.position + Random.insideUnitSphere *20;
+        direction.y = 1;
+        destination = transform.position + direction.normalized * Random.Range(20, 20);
+        Debug.Log(direction);
+
+        
         /*
          Debug.Log(gameObject.name);
          Debug.Log(gameObject.tag);
@@ -28,19 +38,22 @@ public class testtesttest : MonoBehaviour
     }
 
 
-    void Update() // ผกดเผหกดเปผพเ้ก พเ้กะั้่กะ
-    {
+    void Update() // 
+    { 
+        float step = 3 * Time.deltaTime;
+        //Vector3 direction = transform.position + Random.insideUnitSphere * 2;
+        Vector3 destination = transform.position + direction.normalized * Random.Range(5, 5); // กำหนดเป้าหมาย
+       
+        transform.position = Vector3.MoveTowards(transform.position, destination, step);
+
         time -= Time.deltaTime;
-        HP -= 1* Time.deltaTime;
+ 
 
         //MeatIsEaten();
     }
 
     void testLayer()
     {
-        Debug.Log(gameObject.layer);
-        Debug.Log(one.layer);
-
         int a = gameObject.layer;
         int b = one.layer;
 
@@ -60,9 +73,7 @@ public class testtesttest : MonoBehaviour
     void testTag()
     {
         Debug.Log(gameObject.tag);
-        string a = gameObject.tag;
-        Convert.ToInt32(a);
-        Debug.Log(Convert.ToInt32(a) + 2);
+        string a = gameObject.tag;        
     }
 
     void MeatIsEaten()
@@ -79,15 +90,7 @@ public class testtesttest : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.tag == "1")
-
-        {
-            Debug.Log("Won");
-            //Destroy(col.gameObject);
-        }
-    }
+    
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
@@ -95,7 +98,7 @@ public class testtesttest : MonoBehaviour
             return;
         }
 
-        Gizmos.DrawWireSphere(attackPoint.position, colliderRange);
+        Gizmos.DrawWireSphere(transform.position, 20);
     }
 
     

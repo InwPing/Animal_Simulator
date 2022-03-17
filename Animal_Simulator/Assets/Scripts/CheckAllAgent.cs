@@ -44,6 +44,5 @@ public class CheckAllAgent : MonoBehaviour
         string content = "Login date : " + System.DateTime.Now + "\n" + "Rabbit = " + Rabbit + "\n" + "Wildboar = " + Wildboar + "\n" + "Wolf = " + Wolf + "\n\n";
 
         File.AppendAllText(path, content);
-        Debug.Log("print");
     }
 }
