@@ -37,7 +37,7 @@ public class AttackPlant : MonoBehaviour
 
             string b = enemy.tag;
             int y = Convert.ToInt32(b);
-
+         
             if (x > y)
             {
                 enemy.GetComponent<PlantStatus>().TakeDamage(attack);

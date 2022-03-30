@@ -51,14 +51,14 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                     float curDistance = diff.sqrMagnitude;
                     if (curDistance < distance)
                     {
-                        //Debug.Log("53");
+
                         closest = go.gameObject;
                         distance = curDistance;
                     }
                 }                  
             }
 
-            //Debug.Log("61");
+
             Vector3 dir = Vector3.zero;
             if (closest != null)
             {
@@ -66,14 +66,14 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 Vector3 currentPos = transform.position;
 
                 Vector3 toward = targetPos - currentPos;
-                //Debug.Log("70");
+
                 if (toward.magnitude > runRange.Value)
                 {
-                    //Debug.Log("success");
+
                     return TaskStatus.Success;
                 }
                 else dir -= toward;
-                //Debug.Log("77");
+
             }
 
             dir.Normalize();
@@ -82,7 +82,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             transform.position += dir;
             prevDir = dir;
 
-            //Debug.Log("87");
+
             return TaskStatus.Running;
 
         }

@@ -5,27 +5,30 @@ using System.IO;
 
 public class CheckAllAgent : MonoBehaviour
 {
+    [SerializeField] public int Tree;
     [SerializeField] public int Grass;
     [SerializeField] public int Rabbit;
     [SerializeField] public int Wildboar;
     [SerializeField] public int Wolf;
+    
+
 
     private float time;
 
-    // Start is called before the first frame update
     void Start()
     {
         CreateText();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Grass = GameObject.FindGameObjectsWithTag("0").Length;
         Rabbit = GameObject.FindGameObjectsWithTag("1").Length;
         Wildboar = GameObject.FindGameObjectsWithTag("2").Length;
-        Wolf = GameObject.FindGameObjectsWithTag("3").Length; 
-        
+        Wolf = GameObject.FindGameObjectsWithTag("3").Length;
+        Tree = GameObject.FindGameObjectsWithTag("tree").Length;
+
+
         time += Time.deltaTime;
         if ( time >= 10.0f)
         {

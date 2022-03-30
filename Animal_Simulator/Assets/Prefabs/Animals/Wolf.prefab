@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 1756928681523231664}
   - component: {fileID: 3064027414356872383}
   - component: {fileID: 5295523548731179093}
+  - component: {fileID: 4676460077364360754}
   m_Layer: 7
   m_Name: Wolf
   m_TagString: 3
@@ -274,12 +275,7 @@ MonoBehaviour:
   Meat: {fileID: 23256878733264632, guid: 7d508a9eb49f57842ad8c8ff009c6d3f, type: 3}
   time: 0
   timeClock: 0
-  timeReadyForSex: 15
   countEat: 0
-  conditionSex: 6
-  minRandom: 0
-  maxRandom: 2
-  Clock: 0
   functionCounterAttack: 0
 --- !u!114 &4057420735908756843
 MonoBehaviour:
@@ -346,7 +342,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4046522280088220858}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -490,6 +486,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   age: 300
+--- !u!114 &4676460077364360754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046522280088220858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 789439c6d45e12849b5629fec905ea6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4552708754188078129
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4651961401628007367}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

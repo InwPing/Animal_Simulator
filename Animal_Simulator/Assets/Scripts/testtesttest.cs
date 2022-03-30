@@ -13,19 +13,13 @@ public class testtesttest : MonoBehaviour
     [SerializeField] GameObject one;
     private Vector3 thisPos;
     public Vector3 tarPos;
-    private Vector3 direction;
-    private Vector3 destination;
+    float lastXVal;
 
-    public float time;
 
     void Start()
     {
-        direction = transform.position + Random.insideUnitSphere *20;
-        direction.y = 1;
-        destination = transform.position + direction.normalized * Random.Range(20, 20);
-        Debug.Log(direction);
 
-        
+        lastXVal = transform.position.x;
         /*
          Debug.Log(gameObject.name);
          Debug.Log(gameObject.tag);
@@ -39,15 +33,26 @@ public class testtesttest : MonoBehaviour
 
 
     void Update() // 
-    { 
-        float step = 3 * Time.deltaTime;
-        //Vector3 direction = transform.position + Random.insideUnitSphere * 2;
-        Vector3 destination = transform.position + direction.normalized * Random.Range(5, 5); // กำหนดเป้าหมาย
-       
-        transform.position = Vector3.MoveTowards(transform.position, destination, step);
+    {
+        if (transform.hasChanged)
+        {
+            if (transform.position.x < lastXVal)
+            {
+                Debug.Log("Decreased!");
+                //Update lastXVal
+                lastXVal = transform.position.x;
+            }
 
-        time -= Time.deltaTime;
- 
+            else if (transform.position.x > lastXVal)
+            {
+                Debug.Log("Increased");
+
+                //Update lastXVal
+                lastXVal = transform.position.x;
+            }
+
+            transform.hasChanged = false;
+        }
 
         //MeatIsEaten();
     }
@@ -90,7 +95,6 @@ public class testtesttest : MonoBehaviour
         }
     }
 
-    
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null)

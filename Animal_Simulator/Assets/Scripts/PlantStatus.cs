@@ -21,7 +21,7 @@ public class PlantStatus : MonoBehaviour
     [SerializeField] Transform eatenPoint;
     [SerializeField] float colliderRange = 2f;
     [SerializeField] LayerMask enemyLayers;
-
+    [SerializeField] bool ImmotalObject = false;
 
     void Start()
     {
@@ -30,6 +30,11 @@ public class PlantStatus : MonoBehaviour
 
     void Update()
     {
+        if(ImmotalObject == true)
+        {
+            heal = 100000;
+        }
+
         Collider[] hitObj = Physics.OverlapSphere(eatenPoint.position, colliderRange, enemyLayers);
 
         foreach (Collider enemy in hitObj)//if (currentHealth <= 0)

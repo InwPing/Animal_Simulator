@@ -15,6 +15,9 @@ TagManager:
   - W_Build
   - WB_Build
   - sprite
+  - tree
+  - smell
+  - rabbitSmell
   layers:
   - Default
   - TransparentFX
@@ -24,11 +27,11 @@ TagManager:
   - UI
   - BaseLayer
   - Enemies
-  - Plants
+  - Tree
   - Building
   - Player
-  - 
-  - 
+  - Plant
+  - Smells
   - 
   - 
   - 

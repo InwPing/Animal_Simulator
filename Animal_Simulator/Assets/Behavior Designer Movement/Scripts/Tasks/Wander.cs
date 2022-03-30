@@ -49,7 +49,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
                 else 
                 {
                     TrySetTarget();
-                    Debug.Log("trysettarget 52");
                 }
             }
             return TaskStatus.Running;

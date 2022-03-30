@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEditor;
-
 namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 {
     [TaskCategory("AgentSystem")]
-    public class AgentFollowV4 : Action
+    public class AgentFollowNameTag : Action
     {
         public SharedString Mytag;
         public float colliderRange;
@@ -49,6 +48,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             Collider[] hitObj = Physics.OverlapSphere(thisObjPos, colliderRange, enemyLayers);
             foreach (Collider enemy in hitObj)
             {
+                Debug.Log(enemy.name);
                 a = Mytag.Value; // a = 1
                 x = Convert.ToInt32(a);
 
@@ -56,7 +56,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 b = enemy.tag;
                 y = Convert.ToInt32(b);
 
-                if (x > y) // 1 > 0  แท็กเรามากกว่าแท็กศัตรู
+                if (x == y) // 1 > 0  แท็กเรามากกว่าแท็กศัตรู
                 {
                     tag = b;
                     GameObject[] tags;
@@ -72,26 +72,9 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                         }
                     }
                 }
-                if (x < y) // 1 < 2 แท็กเราน้อยกว่าแท็กศัตรู
-                {
-                    enemyTag = b;
-                    GameObject[] ETags;
-                    ETags = GameObject.FindGameObjectsWithTag(enemyTag.Value);
-                    foreach (GameObject ETag in ETags)
-                    {
-                        Vector3 diffETag = ETag.transform.position - thisObjPos;
-                        float curDistanceETag = diffETag.sqrMagnitude;
-                        if (curDistanceETag < z)
-                        {
-                            closestEnemy = ETag;
-                            z = curDistanceETag;
-                        }
-                    }
-                }
+                
             }
 
-            if ((closest != null) || (closestEnemy != null))
-            {               
                 Vector3 currentPos = transform.position;
 
                 if (closest != null)
@@ -108,20 +91,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                     }
                 }
 
-                if (closestEnemy != null)
-                {
-                    Vector3 enemyPos = closestEnemy.transform.position;
-                    Vector3 x = enemyPos - currentPos;
-                    if (x.magnitude <= touchedDist.Value)
-                    {
-                        return TaskStatus.Success;
-                    }
-                    if (x.magnitude < search.Value)
-                    {
-                        dir += x;
-                    }
-                }
-            }
+            
             if ((closest == null) && (closestEnemy == null))
             {
                 return TaskStatus.Failure;

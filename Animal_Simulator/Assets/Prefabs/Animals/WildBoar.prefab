@@ -885,12 +885,7 @@ MonoBehaviour:
   Meat: {fileID: 1543187425221919526, guid: fa3912906995ff44c99f02719c3e316e, type: 3}
   time: 0
   timeClock: 0
-  timeReadyForSex: 15
   countEat: 0
-  conditionSex: 10
-  minRandom: 0
-  maxRandom: 2
-  Clock: 0
   functionCounterAttack: 0
 --- !u!114 &866319523990505359
 MonoBehaviour:
@@ -926,7 +921,7 @@ MonoBehaviour:
   attackRange: 2
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2048
   attack: 25
 --- !u!114 &7510616633662159998
 MonoBehaviour:
