@@ -6,6 +6,7 @@ public class testAi : MonoBehaviour
 {
     public Rigidbody rb;
     public Animator anim;
+    [SerializeField] private string Tag;
 
     private float lastXVal;
     private bool isInChaseRange;
@@ -14,7 +15,7 @@ public class testAi : MonoBehaviour
     void Start()
     {
         lastXVal = transform.position.x;
-        GameObject PL = GameObject.FindWithTag("Player");
+        GameObject PL = GameObject.FindWithTag(Tag);
         if (PL != null)
         {
             rb = PL.GetComponent<Rigidbody>();

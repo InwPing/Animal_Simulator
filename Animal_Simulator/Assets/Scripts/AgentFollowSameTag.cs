@@ -7,9 +7,9 @@ using UnityEditor;
 namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 {
     [TaskCategory("AgentSystem")]
-    public class AgentFollowTag : Action
+    public class AgentFollowSameTag : Action
     {
-        public string tag;
+        public SharedString Mytag;
         public float colliderRange;
         public LayerMask enemyLayers;
 
@@ -30,7 +30,6 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 
         public override TaskStatus OnUpdate()
         {
-
             GameObject closest = null;
 
             float distance = Mathf.Infinity;
@@ -38,9 +37,26 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 
             Vector3 thisObjPos = transform.position;
             Collider[] hitObj = Physics.OverlapSphere(thisObjPos, colliderRange, enemyLayers);
+            /*if (hitObj.Length > 1)
+            {
+                for (int i = 1; i <= hitObj.Length; i++)
+                {
+                    if (hitObj[i].tag == Mytag.Value)
+                    {
+                        Vector3 diff = hitObj[i].transform.position - hitObj[0].transform.position;
+                        float curDistancetag = diff.sqrMagnitude;
+                        if (curDistancetag < distance)
+                        {
+                            closest = hitObj[i].gameObject;
+                            distance = curDistancetag;
+                        }
+                    }
+                }
+            }*/
+               
             foreach (Collider enemy in hitObj)
             {
-                if(enemy.tag == tag)
+                if (enemy.transform != transform)
                 {
                     Vector3 difftag = enemy.transform.position - thisObjPos;
                     float curDistancetag = difftag.sqrMagnitude;
@@ -49,8 +65,10 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                         closest = enemy.gameObject;
                         distance = curDistancetag;
                     }
+                    //Debug.Log(transform.position);
+                    //Debug.Log("enemy = " + enemy);
                 }
-                
+                              
             }
 
             if (closest != null)
@@ -62,6 +80,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                
                 if (toward.magnitude <= touchedDist.Value)
                 {
+                    Debug.Log("success");
                     return TaskStatus.Success;
                 }
                 if (toward.magnitude < search.Value)

@@ -17,8 +17,8 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         public SharedFloat fieldOfViewAngle = 360;
         public SharedFloat search;
 
-        private int x;
-        private int y;
+        private float x;
+        private float y;
 
         public SharedString returnTag;
 
@@ -34,29 +34,24 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             foreach (Collider enemy in hitObj)
             {
                 string a = Mytag.Value;
-                x = Convert.ToInt32(a);
+                x = float.Parse(a);
+                //x = Convert.ToInt32(a);
 
                 string b = enemy.tag;
-                y = Convert.ToInt32(b);
+                y = float.Parse(b);
+                //y = Convert.ToInt32(b);
 
                 if (x < y)
                 {
                     returnTag.Value = enemy.tag;
-                    //Debug.Log("TaskStatus = Success");
                     return TaskStatus.Success;
                 }
                 if (x > y)
                 {
                     returnTag.Value = enemy.tag;
-                    //Debug.Log("TaskStatus = Failure");
                     return TaskStatus.Failure;
                 }
-                if (Mytag == null)
-                {
-                    Debug.Log("nullllllllllll");
-                }
             }
-            //Debug.Log("TaskStatus = Failure");
             return TaskStatus.Failure;
         }
 

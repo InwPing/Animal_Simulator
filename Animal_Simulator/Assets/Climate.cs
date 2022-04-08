@@ -44,8 +44,6 @@ public class Climate : MonoBehaviour
             calculateTemperature(x);
             timePerDay = 0;
 
-            Debug.Log(x);
-            //Debug.Log(temperature);
         }
     }
 

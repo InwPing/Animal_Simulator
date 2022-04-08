@@ -8,15 +8,17 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 {
     [TaskCategory("AgentSystem")]
 
-    public class DetectTag : Conditional
+    public class DetectSameTag : Conditional
     {
-        public LayerMask enemyLayers;
-        public string tag;
-        //public string Name;
+        public SharedString Mytag;
         public float colliderRange;
+        public LayerMask enemyLayers;
 
         public SharedFloat fieldOfViewAngle = 360;
         public SharedFloat search;
+
+        private float x;
+        private float y;
 
         public SharedString returnTag;
 
@@ -29,16 +31,19 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         {
             Vector3 thisObjPos = transform.position;
             Collider[] hitObj = Physics.OverlapSphere(thisObjPos, colliderRange, enemyLayers);
-            foreach (Collider enemy in hitObj)
+            if (hitObj.Length > 1)
             {
-                if(enemy.tag == tag)
+                for (int i = 1; i <= hitObj.Length; i++)
                 {
-                    return TaskStatus.Success;
+                    if (hitObj[i].tag == Mytag.Value)
+                    {
+                        returnTag.Value = (hitObj[i].tag);
+                        return TaskStatus.Success;
+                    }
+                    else return TaskStatus.Failure;
                 }
-
                 return TaskStatus.Failure;
             }
-           
             return TaskStatus.Failure;
         }
 
