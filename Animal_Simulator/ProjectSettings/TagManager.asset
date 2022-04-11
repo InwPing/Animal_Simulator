@@ -15,9 +15,17 @@ TagManager:
   - W_Build
   - WB_Build
   - sprite
-  - tree
   - smell
   - rabbitSmell
+  - GroundDecoration1
+  - GroundDecoration2
+  - BoundsConfiner
+  - Event
+  - CropsParentTransform
+  - ItemsParentTransform
+  - Tree
+  - tree
+  - ImmortalObject
   layers:
   - Default
   - TransparentFX
@@ -26,12 +34,13 @@ TagManager:
   - Water
   - UI
   - BaseLayer
-  - Enemies
+  - 'Enemies '
   - Tree
   - Building
   - Player
   - Plant
   - Smells
+  - Crop
   - 
   - 
   - 
@@ -49,12 +58,41 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - ImmortalObject
   m_SortingLayers:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer 2
+  - name: Ground1
     uniqueID: 2203146061
+    locked: 0
+  - name: GroundGrass
+    uniqueID: 2726872099
+    locked: 0
+  - name: GroundSoil
+    uniqueID: 196335933
+    locked: 0
+  - name: Ground2
+    uniqueID: 458314325
+    locked: 0
+  - name: Ground3
+    uniqueID: 261541701
+    locked: 0
+  - name: GroundDecoration1
+    uniqueID: 3215113183
+    locked: 0
+  - name: GroundDecoration2
+    uniqueID: 2571968975
+    locked: 0
+  - name: Instances
+    uniqueID: 447469103
+    locked: 0
+  - name: Front1
+    uniqueID: 2078949469
+    locked: 0
+  - name: Front2
+    uniqueID: 2085002367
+    locked: 0
+  - name: Collisions
+    uniqueID: 2159195829
     locked: 0
