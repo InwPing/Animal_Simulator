@@ -632,12 +632,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4491409802212996696}
-  climate: {fileID: 0}
-  RabbitBuildCave: {fileID: 2348474869606902543}
-  caveDistance: 0
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &6242956113498652397
 MonoBehaviour:
   m_ObjectHideFlags: 0

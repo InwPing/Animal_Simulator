@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Climate : MonoBehaviour
 {
-    CheckAllAgent checkAllAgent;
-    [SerializeField] private float temperature; //ร้อนจัด
-    [SerializeField] private float baseTemperature;
+    [SerializeField] CheckAllAgent checkAllAgent;
+    [SerializeField] private float lastTemperature; //ร้อนจัด
+    [SerializeField] private float firstTemperature;
+    [SerializeField] private float SecondTemperature;
     [SerializeField] private float humidity;
-
-    private float newTreeArrayLength;
-    private float oldTreeArrayLength;
 
     private float timePerMonth;
     private float timePerDay;
@@ -18,15 +16,15 @@ public class Climate : MonoBehaviour
 
 
     private int x;
-    public string[] rainRate;
+    //public string[] rainRate;
     private int newRate;
     private int lastRate;
-    [SerializeField] int randomNum;
+    //[SerializeField] int randomNum;
 
     private int gamrMonth = 1;
     private int gameYear = 1;   
     private int gameDay = 1;
-    public int gameHour = 6;
+    public int gameHour = 7;
     private int gameMinute = 0;
     private int gameSecond = 0;
    
@@ -34,51 +32,96 @@ public class Climate : MonoBehaviour
     private bool gameClockPaused = false;
 
     private float gameTick = 0f;
+    private float treeRatio;
 
+    private float oldA;
 
     void Start()
     {
-        rainRate = new string[10];
+        //rainRate = new string[10];
+        oldA = 0;
         newRate = 0;
         lastRate = newRate;
         humidity = 0.0f;
-        oldTreeArrayLength = newTreeArrayLength;
 
         Humidity();
-        Temperature();
-        calculateTemperature();
+        TemperaturePerMonth();
+        TemperaturePerDay();
+        TemperaturePerHour();
     }
 
     void Update() //temperature อิงตามความชื้อกับช่วงเวลา (กลางวันกลางคือน) ความชื้นอิงอามต้นไม้ layer Crop tag Tree
     {
+        //Rain();
+        Humidity();
+
         if (!gameClockPaused)
         {
             GameTick();
         }
 
-        //Rain();
-        Humidity();
+        if (gameMinute == 59)
+        {
+            TemperaturePerHour();
+            //Debug.Log("TemperaturePerHour()");
+        }
+
+        if (gameHour == 23)
+        {
+            TemperaturePerDay();
+            //Debug.Log("TemperaturePerDay()");
+        }
+        if (gameDay == 30)
+        {
+            TemperaturePerMonth();
+            Debug.Log("TemperaturePerMonth()");
+        }
+
+        if (lastTemperature > 30f)
+        {
+            Debug.Log("weather so hot");
+            if (humidity < 4)
+            {              
+                // function rainning;
+            }
+        }
+
+
     }
 
     void Humidity() // ความชื้นในอากาส
-    {
-        newTreeArrayLength = GameObject.FindGameObjectsWithTag("Tree").Length;
-        if (newTreeArrayLength != oldTreeArrayLength)
-        {
-            humidity = newTreeArrayLength * 0.2f;
-            oldTreeArrayLength = newTreeArrayLength;
-        }
-        else return;
+    {        
+        treeRatio = (float)(checkAllAgent.Tree / checkAllAgent.maxTree) * 100f;
+        humidity = treeRatio * 0.1f; // ค่าความชื้นในอากาศ 1 - 10
     }
-    void Temperature() // 3 เดือน
+    void TemperaturePerMonth() 
     {
-        baseTemperature = Random.Range(21, 30);
+        float X = Random.Range(21, 30);
+        firstTemperature = X;
     }
 
-    void calculateTemperature()
+    void TemperaturePerDay()
     {
-        temperature =(baseTemperature - humidity ) + (float)gameHour / 12f;
+        SecondTemperature = firstTemperature - oldA; //29
+        float A = Random.Range(0, humidity/2f);
+        SecondTemperature = firstTemperature + A; // 30
+        oldA = A;
+
     }
+
+    void TemperaturePerHour()
+    {
+        float B = Mathf.Abs(gameHour - 14); //ค่าสัมบูรณ์
+        float Y = (SecondTemperature - (B / 3f));
+        lastTemperature = Y;
+    }
+
+    public IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(2.0f);
+    }
+
+
     /*void Rain()
     {
         if (lastRate != newRate)
@@ -121,7 +164,7 @@ public class Climate : MonoBehaviour
 
     private void UpdateGameSecond()
     {
-        gameSecond++;
+        gameSecond = gameSecond + 60;
 
         if (gameSecond > 59)
         {
@@ -133,12 +176,13 @@ public class Climate : MonoBehaviour
                 gameMinute = 0;
                 gameHour++;
 
-                calculateTemperature();
+
 
                 if (gameHour > 23)
                 {
                     gameHour = 0;
                     gameDay++;
+
 
                     if (gameDay > 30)
                     {
@@ -151,7 +195,7 @@ public class Climate : MonoBehaviour
                             gamrMonth = 1;
                             gameYear++;
 
-                            Temperature();
+                            
 
                             if (gameYear > 9999)
                             {

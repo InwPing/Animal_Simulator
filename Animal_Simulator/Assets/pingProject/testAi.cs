@@ -4,54 +4,39 @@ using UnityEngine;
 
 public class testAi : MonoBehaviour
 {
-    public Rigidbody rb;
-    public Animator anim;
-    [SerializeField] private string Tag;
+    public Animator _animator;
 
     private float lastXVal;
     private bool isInChaseRange;
-
+    public GameObject a;
 
     void Start()
     {
         lastXVal = transform.position.x;
-        GameObject PL = GameObject.FindWithTag(Tag);
-        if (PL != null)
-        {
-            rb = PL.GetComponent<Rigidbody>();
-        }
 
-        GameObject a = GameObject.FindWithTag("sprite");
+     
         if (a != null)
         {
-            anim = a.GetComponent<Animator>();
+            _animator = a.GetComponent<Animator>();
         }
     }
     void Update()
     {
+        if (transform.position.x < lastXVal) //เดินซ้าย
+        {
+            _animator.SetBool("isRabbitWalkRight", false);
+            _animator.SetBool("isRabbitWalkLeft", true);
+            //Debug.Log("Left");
+            lastXVal = transform.position.x;
+        }
 
-        //if (transform.hasChanged)
-        //{            
-        //Debug.Log("anim.SetBool");
-
-            if (transform.position.x < lastXVal) //เดินซ้าย
-            {
-                anim.SetBool("walkRight", false);
-                anim.SetBool("walkLeft", true);
-                Debug.Log("Left");
-                lastXVal = transform.position.x;
-            }
-
-            else if (transform.position.x > lastXVal) //เดินขวา
-            {
-                anim.SetBool("walkRight", true);
-                anim.SetBool("walkLeft", false);
-                Debug.Log("Right");
-                lastXVal = transform.position.x;
-            }
-
-           //transform.hasChanged = false;
-        //}
+        else if (transform.position.x > lastXVal) //เดินขวา
+        {
+            _animator.SetBool("isRabbitWalkRight", true);
+            _animator.SetBool("isRabbitWalkLeft", false);
+            //Debug.Log("Right");
+            lastXVal = transform.position.x;
+        }
         
     }
 }

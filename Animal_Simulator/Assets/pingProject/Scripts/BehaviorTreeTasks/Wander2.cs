@@ -1,9 +1,13 @@
-﻿using UnityEngine;
-
+﻿using BehaviorDesigner.Runtime;
+using BehaviorDesigner.Runtime.Tasks;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
 namespace BehaviorDesigner.Runtime.Tasks.Movement
 {    
 
-    public class Wander2 : Action
+    public class Wander2 : NavMeshMovement
     {
         public float step;
 
@@ -20,31 +24,52 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         public SharedFloat fieldOfViewAngle = 360;
 
         //public float PauseTime = 0;
-
+        public Animator _animator;
+        private float lastXVal;
 
         private Vector3 destination = Vector3.zero;
         private Vector3 direction = Vector3.zero;
 
         public float time = 4;
+        public override void OnAwake()
+        {
+            //_animator = GetComponent<Animator>();
+        }
 
 
         public override void OnStart()
         {
-            base.OnStart();
+            lastXVal = transform.position.x;
         }
 
         // There is no success or fail state with wander - the agent will just keep wandering
         public override TaskStatus OnUpdate()
         {
             time -= Time.deltaTime;
+            if (transform.position.x < lastXVal) //เดินซ้าย
+            {
+                _animator.SetBool("isRabbitWalkRight", false);
+                _animator.SetBool("isRabbitWalkLeft", true);
+                //Debug.Log("Left");
+                lastXVal = transform.position.x;
+            }
+
+            else if (transform.position.x > lastXVal) //เดินขวา
+            {
+                _animator.SetBool("isRabbitWalkRight", true);
+                _animator.SetBool("isRabbitWalkLeft", false);
+                //Debug.Log("Right");
+                lastXVal = transform.position.x;
+            }
+
             Collider[] Objects = Physics.OverlapSphere(transform.position, colliderRange, crashLayers);
             foreach (Collider Object in Objects)
             {
-                if (Object.tag.Contains(crashObjectName))
+                /*if (Object.tag.Contains(crashObjectName))
                 {
-                    Debug.Log("crash");
+                    //Debug.Log("crash");
                     destination = destination * (-1);
-                }
+                }*/
             }
 
             if (direction == Vector3.zero)

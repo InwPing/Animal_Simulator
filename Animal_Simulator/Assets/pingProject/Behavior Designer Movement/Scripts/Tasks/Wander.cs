@@ -49,6 +49,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
                 else 
                 {
                     TrySetTarget();
+                    Debug.Log(" TrySetTarget = " + TrySetTarget());
                 }
             }
             return TaskStatus.Running;
@@ -69,7 +70,8 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
             }
             if (validDestination) 
             {
-                SetDestination(destination); // return bool True if the destination was requested successfully, otherwise false.              
+                SetDestination(destination);
+                Debug.Log(" validDestination = " + validDestination);// return bool True if the destination was requested successfully, otherwise false.              
             }
             return validDestination;
         }

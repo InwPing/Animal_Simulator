@@ -5,6 +5,7 @@ using System.IO;
 
 public class CheckAllAgent : MonoBehaviour
 {
+    [SerializeField] public int maxTree;
     [SerializeField] public int Tree;
     [SerializeField] public int Grass;
     [SerializeField] public int Rabbit;
@@ -18,6 +19,7 @@ public class CheckAllAgent : MonoBehaviour
     void Start()
     {
         CreateText();
+        maxTree = GameObject.FindGameObjectsWithTag("Tree").Length;
     }
 
     void Update()

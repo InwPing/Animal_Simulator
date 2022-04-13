@@ -9,12 +9,12 @@ public class Controller_Rabbit: MonoBehaviour
 {
 
     [SerializeField] Enemy enemy;
-    [SerializeField] Climate climate;
-    [SerializeField] RabbitBuildCave RabbitBuildCave;
+    //[SerializeField] Climate climate;
+    //[SerializeField] RabbitBuildCave RabbitBuildCave;
 
-    private GameObject cavePrefab;
-    public float caveDistance;
-    public LayerMask enemyLayers;
+    //private GameObject cavePrefab;
+    //public float caveDistance;
+    //public LayerMask enemyLayers;
 
     void Start()
     {
@@ -63,7 +63,7 @@ public class Controller_Rabbit: MonoBehaviour
         
     }
 
-    void buildCave() // ยังไม่เสด
+    /*void buildCave() // ยังไม่เสด
     {
         Vector3 thisObjPos = transform.position;
         Collider[] Caves = Physics.OverlapSphere(thisObjPos, caveDistance, enemyLayers);
@@ -78,9 +78,10 @@ public class Controller_Rabbit: MonoBehaviour
                 Debug.Log("build cave");
             }
         }
-    }
+    }*/
+    
     public IEnumerator Delay()
-    {
+    {       
         yield return new WaitForSeconds(2.0f);
     }
 }
