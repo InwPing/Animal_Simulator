@@ -10,35 +10,21 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] public string Name;
-
-    // Health & Hungry
-    [SerializeField] public float maxHealth;
-    [SerializeField] public float currentHealth;
-
-    [SerializeField] public int maxHungryPoint;
-    [SerializeField] public int currentHungryPoint;
+    [SerializeField] private string Name;
+     public float maxHealth;
+     public float currentHealth;
+     public int maxHungryPoint;
+     public int currentHungryPoint;
     [SerializeField] private int hungryTime;
 
-    // About Meat
     [SerializeField] private GameObject Meat = null;
     private int NumberOfMeat = 3;
 
-    // Timer
     [SerializeField] private float time; // ใช้นับเวลาเฉยๆ
     private float floatTime;
-    [SerializeField] private float timeClock;
-    //[SerializeField] private float timeReadyForSex = 15.0f;
 
-    // Sex()
-    [SerializeField] public int countEat = 0; 
-    //[SerializeField] private int conditionSex = 0;
-    //[SerializeField] private int minRandom = 0;
-    //[SerializeField] private int maxRandom = 0;
-
-   // [SerializeField] private bool Clock = false;
-
-    [SerializeField] public bool functionCounterAttack = false;
+    public int countEat = 0; 
+    public bool functionCounterAttack = false;
 
 
     void Start()
@@ -76,8 +62,9 @@ public class Enemy : MonoBehaviour
         if (currentHealth < 0)
         {
             currentHealth = 0;
-            Destroy(gameObject);
-            DropMeat();
+            StartCoroutine(DelayForSec());
+            //Destroy(gameObject);
+            //DropMeat();
         }
 
     }
@@ -100,7 +87,8 @@ public class Enemy : MonoBehaviour
         if (currentHungryPoint <= 0)
         {
             currentHungryPoint = 0;
-            Destroy(gameObject);
+            StartCoroutine(DelayForSec());
+            //Destroy(gameObject);
         }
     }
 
@@ -159,6 +147,13 @@ public class Enemy : MonoBehaviour
             }
         }
         else return;
+    }
+
+    public IEnumerator DelayForSec()
+    {      
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+        DropMeat();
     }
 
     /*void OnDrawGizmosSelected()
