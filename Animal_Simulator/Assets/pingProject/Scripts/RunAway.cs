@@ -9,15 +9,12 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
     public class RunAway : Action
     {
         public SharedString Mytag;
-        public float colliderRange;
+        public SharedFloat colliderRange;
         public LayerMask enemyLayers;
-
         public SharedFloat speed;
-        private SharedFloat runRange;
+        public SharedBool IsRunning;
 
-        private GameObject[] targetObjects;
         private Vector3 prevDir;
-
         private int x;
         private int y;
         private string a;
@@ -26,13 +23,14 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         public override void OnStart()
         {
             base.OnStart();
-            runRange = colliderRange;
+            
         }
 
         public override TaskStatus OnUpdate()
         {
+            IsRunning.Value = true;
             Vector3 thisObjPos = transform.position;
-            Collider[] gos = Physics.OverlapSphere(thisObjPos, colliderRange, enemyLayers);
+            Collider[] gos = Physics.OverlapSphere(thisObjPos, colliderRange.Value, enemyLayers);
 
             GameObject closest = null;
             float distance = Mathf.Infinity;
@@ -51,7 +49,6 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                     float curDistance = diff.sqrMagnitude;
                     if (curDistance < distance)
                     {
-
                         closest = go.gameObject;
                         distance = curDistance;
                     }
@@ -67,9 +64,10 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 
                 Vector3 toward = targetPos - currentPos;
 
-                if (toward.magnitude > runRange.Value)
+                if (toward.magnitude >= colliderRange.Value)
                 {
-
+                    IsRunning.Value = false;
+                    //Debug.Log(isRunning.Value);
                     return TaskStatus.Success;
                 }
                 else dir -= toward;
@@ -82,7 +80,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             transform.position += dir;
             prevDir = dir;
 
-
+            //Debug.Log(isRunning.Value);
             return TaskStatus.Running;
 
         }
@@ -90,6 +88,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         public override void OnReset()
         {
             base.OnReset();
+            IsRunning.Value = false;
 
         }
 

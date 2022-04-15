@@ -41,24 +41,16 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
                 }
             }
             dir.Normalize();
-
             dir = dir * speed.Value * Time.deltaTime;
-
             dir = Vector3.Lerp(prevDir, dir, 0.2f);
-
             transform.position += dir;
-
             prevDir = dir;
-
-
-            return TaskStatus.Running;
-            
+            return TaskStatus.Running;            
         }
 
         public override void OnReset()
         {
             base.OnReset();
-
         }
     }
 }

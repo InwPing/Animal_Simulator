@@ -9,7 +9,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
 
     public class RabbitWander : Action
     {
-        public float speed;
+        public SharedFloat speed;
 
         public SharedFloat minWanderDistance = 20;
         public SharedFloat maxWanderDistance = 20;
@@ -63,7 +63,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
                         }
                         if (randomPos == true)
                         {
-                            transform.position = Vector3.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
+                            transform.position = Vector3.MoveTowards(transform.position, newPos, speed.Value * Time.deltaTime);
                             if (transform.position == newPos)
                             {
                                 randomPos = false;
@@ -87,7 +87,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
 
                 if (randomPos == true)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, newPos, speed.Value * Time.deltaTime);
                     if (transform.position == newPos)
                     {
                         randomPos = false;

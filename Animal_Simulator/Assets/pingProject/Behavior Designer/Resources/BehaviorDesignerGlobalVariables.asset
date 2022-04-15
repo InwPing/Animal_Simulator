@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mVariableData:
     variableStartIndex: 
-    JSONSerialization: '{"Variables":[]}'
+    JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Rabbit_walkSpeed","IsShared":true,"IsGlobal":true,"Tooltip":"rabbit
+      walk speed","SinglemValue":3},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Rabbit_runSpeed","IsShared":true,"IsGlobal":true,"Tooltip":"rabbir
+      run speed","SinglemValue":7}]}'
     fieldSerializationData:
       typeName: []
       fieldNameHash: 
