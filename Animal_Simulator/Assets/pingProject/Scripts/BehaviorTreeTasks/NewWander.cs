@@ -7,7 +7,7 @@ using UnityEngine.AI;
 namespace BehaviorDesigner.Runtime.Tasks.Movement
 {    
 
-    public class RabbitWander : Action
+    public class NewWander : Action
     {
         public SharedFloat speed;
 
@@ -55,7 +55,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
                     {
                         if (randomPos == false)
                         {
-                            newPos = Random.insideUnitSphere * 10;
+                            newPos = Random.insideUnitSphere * wanderRate.Value;
                             newPos.y = 0;
                             Debug.Log(newPos);
                             randomPos = true;
