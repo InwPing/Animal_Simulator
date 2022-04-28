@@ -26,6 +26,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Tutorials
         public override void OnAwake()
         {
             navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+            navMeshAgent.updateRotation = false;
         }
 
         /// <summary>

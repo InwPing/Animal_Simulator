@@ -9,6 +9,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         public SharedFloat search;
         public SharedFloat touchedDist;
         public SharedGameObject targetObject;
+        public SharedBool IsRunning;
 
         private Vector3 prevDir;
 
@@ -18,6 +19,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         }
         public override TaskStatus OnUpdate()
         {
+            IsRunning.Value = true;
             Vector3 dir = Vector3.zero;
             GameObject x = targetObject.Value;
             //Vector3 targetPosition = targetObject.transform.position;
@@ -26,6 +28,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 
             if (toward.magnitude < touchedDist.Value)
             {
+                IsRunning.Value = false;
                 return TaskStatus.Success;
             }
             if (toward.magnitude < search.Value)
@@ -43,6 +46,7 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         public override void OnReset()
         {
             base.OnReset();
+            IsRunning.Value = false;
         }
     }
 }

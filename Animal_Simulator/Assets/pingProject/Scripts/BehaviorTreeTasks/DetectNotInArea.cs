@@ -8,14 +8,12 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
 {
     [TaskCategory("AgentSystem")]
 
-    public class DetectNotInSearchRange : Conditional
+    public class DetectNotInArea: Conditional
     {
         public SharedString targetTag;
-        public SharedString targetName;
         public SharedFloat colliderRange;
         public LayerMask enemyLayers;
         public SharedFloat fieldOfViewAngle = 360;
-        public SharedString returnTag;
 
         public override void OnStart()
         {
@@ -28,13 +26,18 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
             Collider[] hitObj = Physics.OverlapSphere(thisObjPos, colliderRange.Value, enemyLayers);
             foreach (Collider enemy in hitObj)
             {
-                if ((enemy.tag == targetTag.Value) && (enemy.name == targetName.Value))
+                if (enemy.tag == targetTag.Value)
                 {
-                    return TaskStatus.Failure;
+                    return TaskStatus.Running;
                 }
-                return TaskStatus.Success;
+                else 
+                {
+                    return TaskStatus.Success;
+                }
+                
             }
-            return TaskStatus.Failure;
+            return TaskStatus.Success;
+            //return TaskStatus.Failure;
         }
 
         public override void OnDrawGizmos()

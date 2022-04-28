@@ -26,20 +26,19 @@ namespace BehaviorDesigner.Runtime.Tasks.AgentSystem
         {
             Vector3 thisObjPos = transform.position;
             Collider[] hitObj = Physics.OverlapSphere(thisObjPos, colliderRange.Value, enemyLayers);
-            if (hitObj.Length > 1)
+            foreach (Collider obj in hitObj)
             {
-                for (int i = 1; i <= hitObj.Length; i++)
-                {
-                    if (hitObj[i].tag == Mytag.Value)
+                if(obj.tag == Mytag.Value)
+                {                   
+                    if (obj.transform.root != transform)
                     {
-                        returnTag.Value = (hitObj[i].tag);
-                        returnGameObject.Value = (hitObj[i].gameObject);
+                        returnTag.Value = obj.tag;
+                        returnGameObject.Value = obj.gameObject;
                         return TaskStatus.Success;
-                    }
-                    else return TaskStatus.Failure;
+                    }                   
                 }
-                return TaskStatus.Failure;
             }
+           
             return TaskStatus.Failure;
         }
 

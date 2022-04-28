@@ -6,7 +6,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
     [TaskCategory("Movement")]
     [HelpURL("https://www.opsive.com/support/documentation/behavior-designer-movement-pack/")]
     [TaskIcon("Assets/Behavior Designer Movement/Editor/Icons/{SkinColor}WanderIcon.png")]
-    public class Wander : NavMeshMovement
+    public class Wander2 : NavMeshMovement
     {
         [Tooltip("Minimum distance ahead of the current position to look ahead for a destination")]
         public SharedFloat minWanderDistance = 20;
@@ -22,7 +22,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         public SharedInt targetRetries = 1;
 
         private float pauseTime;
-        private float destinationReachTime;
+        private float destinationReachTime;      
 
         // There is no success or fail state with wander - the agent will just keep wandering
         public override void OnStart()
@@ -32,28 +32,28 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         }
 
         public override TaskStatus OnUpdate()
-        {
-            //navMeshAgent.updateRotation = false;
-            if (HasArrived()) 
+        {           
+            //navMeshAgent.updateRotation = false;       
+            if (HasArrived())
             {
                 // The agent should pause at the destination only if the max pause duration is greater than 0
-                if (maxPauseDuration.Value > 0) 
+                if (maxPauseDuration.Value > 0)
                 {
-                    if (destinationReachTime == -1) 
+                    if (destinationReachTime == -1)
                     {
                         destinationReachTime = Time.time;
                         pauseTime = Random.Range(minPauseDuration.Value, maxPauseDuration.Value);
                     }
-                    if (destinationReachTime + pauseTime <= Time.time) 
+                    if (destinationReachTime + pauseTime <= Time.time)
                     {
                         // Only reset the time if a destination has been set.
-                        if (TrySetTarget()) 
+                        if (TrySetTarget())
                         {
                             destinationReachTime = -1;
                         }
                     }
-                } 
-                else 
+                }
+                else
                 {
                     TrySetTarget();
                 }
@@ -66,28 +66,28 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
             var direction = transform.forward;
             var validDestination = false;
             var attempts = targetRetries.Value;
-            var destination = transform.position;
-            while (!validDestination && attempts > 0) 
+            var destination = transform.position;           
+            while (!validDestination && attempts > 0)
             {
                 direction = direction + Random.insideUnitSphere * wanderRate.Value; // สุ่มจุด
                 destination = transform.forward + direction.normalized * Random.Range(minWanderDistance.Value, maxWanderDistance.Value); // เดินไปทิศนั้น
-                validDestination = SamplePosition(destination); // return bool True if the nearest point is found.
-                attempts--;
+                destination.y = 0;
+                validDestination = SamplePosition(destination); // return bool True if the nearest point is found.           
+                attempts--; // 0
             }
-            if (validDestination) 
+            if (validDestination)
             {
+                //Debug.Log("destination in if =" + destination);
                 SetDestination(destination);
-                //Debug.Log(" validDestination = " + validDestination);// return bool True if the destination was requested successfully, otherwise false.              
+                Debug.Log(" validDestination = " + validDestination);// return bool True if the destination was requested successfully, otherwise false.              
             }
             return validDestination;
         }
 
-        // Reset the public variables
         public override void OnReset()
         {
             minWanderDistance = 20;
             maxWanderDistance = 20;
-            wanderRate = 2;
             minPauseDuration = 0;
             maxPauseDuration = 0;
             targetRetries = 1;

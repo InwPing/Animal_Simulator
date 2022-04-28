@@ -4,7 +4,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject
 {
     [TaskCategory("Unity/GameObject")]
     [TaskDescription("Destorys the specified GameObject. Returns Success.")]
-    public class Destroy : Action
+    public class DestroyObject : Action
     {
         [Tooltip("The GameObject that the task operates on. If null the task GameObject is used.")]
         public SharedGameObject targetGameObject;
@@ -13,15 +13,12 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject
 
         public override TaskStatus OnUpdate()
         {
-            var destroyGameObject = GetDefaultGameObject(targetGameObject.Value);
-            if (time == 0) {
-                GameObject.Destroy(destroyGameObject);
-            } else {
-                GameObject.Destroy(destroyGameObject, time);
-            }
+            var destroyGameObject = targetGameObject.Value;
+            GameObject.Destroy(targetGameObject.Value);
+
 
             return TaskStatus.Success;
-        } 
+        }
 
 
         public override void OnReset()

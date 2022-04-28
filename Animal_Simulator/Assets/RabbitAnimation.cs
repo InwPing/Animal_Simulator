@@ -6,7 +6,6 @@ using BehaviorDesigner.Runtime;
 public class RabbitAnimation : MonoBehaviour
 {
     Enemy enemy;
-    public BehaviorTree behaviorTree;
     private Animator animator;
     private float lastXVal;
     private bool ifRun;
@@ -18,27 +17,24 @@ public class RabbitAnimation : MonoBehaviour
         GameObject a = this.gameObject.transform.GetChild(0).gameObject;
         animator = a.GetComponent<Animator>();
 
-       
+      
     }
     void Start()
     {
         lastXVal = transform.position.x;
-        
-        //GlobalVariables.Instance.SetVariable("isRunning", true);
     }
 
-    // Update is called once per frame
     void Update()
     {       
         Animation();
     }
     private void Animation()
     {
-        var runCondition = (SharedBool)behaviorTree.GetVariable("IsRunning");
+        var runCondition = (SharedBool)GlobalVariables.Instance.GetVariable("RabbitIsRunning");
         //Debug.Log(runCondition);
 
         ifRun = runCondition.Value;
-        Debug.Log(ifRun);
+        //Debug.Log(ifRun);
 
         if (transform.position.x == lastXVal) //Idle
         {
@@ -56,7 +52,7 @@ public class RabbitAnimation : MonoBehaviour
             animator.SetBool("Idle", false);
             animator.SetBool("Run", false);
             animator.SetBool("Walk", true);
-            lastXVal = transform.position.x;
+
 
             //Debug.Log(ifRun);
             if (ifRun == true) // วิ่งขวา
@@ -64,7 +60,10 @@ public class RabbitAnimation : MonoBehaviour
                 animator.SetBool("Idle", false);
                 animator.SetBool("Run", true);
                 animator.SetBool("Walk", false);
+
             }
+
+            lastXVal = transform.position.x;
         }
 
         else if (transform.position.x > lastXVal) //เดินขวา
@@ -75,7 +74,6 @@ public class RabbitAnimation : MonoBehaviour
             animator.SetBool("Idle", false);
             animator.SetBool("Run", false);
             animator.SetBool("Walk", true);
-            lastXVal = transform.position.x;
 
             //Debug.Log(ifRun);
             if (ifRun == true) // วิ่งซ้าย
@@ -85,13 +83,12 @@ public class RabbitAnimation : MonoBehaviour
                 animator.SetBool("Walk", false);
             }
 
+            lastXVal = transform.position.x;
         }
 
         if ( enemy.currentHealth <= 0)
         {
             animator.SetBool("Die", true);
-        }
-     
-
+        }    
     }
 }

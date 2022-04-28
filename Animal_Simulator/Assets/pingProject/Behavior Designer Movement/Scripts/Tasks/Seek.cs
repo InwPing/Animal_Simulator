@@ -15,6 +15,8 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
 
         public override void OnStart()
         {
+            navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+            navMeshAgent.updateRotation = false;
             base.OnStart();
 
             SetDestination(Target());
@@ -24,8 +26,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         // Return running if the agent hasn't reached the destination yet
         public override TaskStatus OnUpdate()
         {
-            if (HasArrived()) {
-                Debug.Log("25");
+            if (HasArrived()) {               
                 return TaskStatus.Success;
             }
 

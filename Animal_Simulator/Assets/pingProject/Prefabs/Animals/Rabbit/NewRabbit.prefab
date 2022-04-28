@@ -230,18 +230,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2603137418851068131}
-  - component: {fileID: 2603137418851068128}
-  - component: {fileID: 2603137418851068129}
+  - component: {fileID: 5248234664534302307}
   - component: {fileID: 5178424598483779493}
   - component: {fileID: 2603137418851068142}
   - component: {fileID: 7689023553688223760}
   - component: {fileID: 4606662761959595792}
   - component: {fileID: 4275915449195069256}
-  - component: {fileID: 4080448651200647712}
-  - component: {fileID: 2603137418851068143}
-  - component: {fileID: 1892671854224141158}
-  - component: {fileID: 3938076424416466690}
   - component: {fileID: 8823924292282936563}
+  - component: {fileID: 7621697917484246820}
+  - component: {fileID: 3498749373804182740}
   m_Layer: 7
   m_Name: NewRabbit
   m_TagString: 1
@@ -257,9 +254,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2603137418851068140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.61, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1530428365168997700}
   - {fileID: 284893451420325796}
@@ -267,40 +264,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!195 &2603137418851068128
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2603137418851068140}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!65 &2603137418851068129
-BoxCollider:
+--- !u!136 &5248234664534302307
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2603137418851068140}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 1
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5178424598483779493
 Rigidbody:
@@ -347,7 +323,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2603137418851068140}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66080f3284fe6b044b52d9532dd899f9, type: 3}
   m_Name: 
@@ -378,14 +354,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2603137418851068140}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d09d3478ceda0b4096a12a1cf3d3cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
   age: 10000
---- !u!114 &4080448651200647712
+--- !u!114 &8823924292282936563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2603137418851068140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d0c6c4641c8d04c925853cdb75d1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7621697917484246820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,59 +392,16 @@ MonoBehaviour:
   logTaskChanges: 0
   group: 0
   resetValuesOnRestart: 0
-  externalBehavior: {fileID: 11400000, guid: 597e0d29b8349c54ca31fc270ef296c8, type: 2}
+  externalBehavior: {fileID: 11400000, guid: 2868ef0eea7e0844095f981fe378606e, type: 2}
   mBehaviorSource:
-    behaviorName: rabbit_1
+    behaviorName: test
     behaviorDescription: 
     mTaskData:
       types: []
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: 
-      fieldSerializationData:
-        typeName: []
-        fieldNameHash: 
-        startIndex: 
-        dataPosition: 
-        unityObjects: []
-        byteData: 
-        byteDataArray: 
-      Version: 
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
---- !u!114 &2603137418851068143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2603137418851068140}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startWhenEnabled: 1
-  asynchronousLoad: 0
-  pauseWhenDisabled: 0
-  restartWhenComplete: 0
-  logTaskChanges: 0
-  group: 0
-  resetValuesOnRestart: 0
-  externalBehavior: {fileID: 11400000, guid: 8d906f47640a63d4bb439422cbba29c1, type: 2}
-  mBehaviorSource:
-    behaviorName: rabbit_0
-    behaviorDescription: 
-    mTaskData:
-      types: []
-      parentIndex: 
-      startIndex: 
-      variableStartIndex: 
-      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(1664.92334,-353.721924)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.UnknownTask","NodeData":{"Offset":"(4.92334,223.420822)","Comment":"Unknown
-        Task. Right click and Replace to locate new task."},"ID":1,"Name":"Unknown
-        Wander 2","Instant":true,"StringJSONSerialization":"{\"Type\":\"BehaviorDesigner.Runtime.Tasks.Movement.Wander2\",\"NodeData\":{\"Offset\":\"(4.92334,223.420822)\"},\"ID\":1,\"Name\":\"Wander
-        2\",\"Instant\":true,\"Singlestep\":0,\"SharedFloatminWanderDistance\":{\"Type\":\"BehaviorDesigner.Runtime.SharedFloat\",\"Name\":null,\"SinglemValue\":20},\"SharedFloatmaxWanderDistance\":{\"Type\":\"BehaviorDesigner.Runtime.SharedFloat\",\"Name\":null,\"SinglemValue\":20},\"SharedFloatwanderRate\":{\"Type\":\"BehaviorDesigner.Runtime.SharedFloat\",\"Name\":null,\"SinglemValue\":2},\"LayerMaskcrashLayers\":0,\"SinglecolliderRange\":0,\"SharedFloatfieldOfViewAngle\":{\"Type\":\"BehaviorDesigner.Runtime.SharedFloat\",\"Name\":null,\"SinglemValue\":360},\"Singletime\":4,\"SharedFloatspeed\":{\"Type\":\"BehaviorDesigner.Runtime.SharedFloat\",\"Name\":null,\"SinglemValue\":10},\"SharedFloatangularSpeed\":{\"Type\":\"BehaviorDesigner.Runtime.SharedFloat\",\"Name\":null,\"SinglemValue\":120},\"SharedFloatarriveDistance\":{\"Type\":\"BehaviorDesigner.Runtime.SharedFloat\",\"Name\":null,\"SinglemValue\":0.2},\"SharedBoolstopOnTaskEnd\":{\"Type\":\"BehaviorDesigner.Runtime.SharedBool\",\"Name\":null,\"BooleanmValue\":true},\"SharedBoolupdateRotation\":{\"Type\":\"BehaviorDesigner.Runtime.SharedBool\",\"Name\":null,\"BooleanmValue\":true}}","List`1fieldNameHash":[],"List`1startIndex":[],"List`1dataPosition":[],"List`1unityObjects":[],"List`1byteData":[]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"TargetObject","IsShared":true}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"returnEnemy","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"Escape","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"returnRabbitCave","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"returnGameObject","IsShared":true}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -468,99 +413,28 @@ MonoBehaviour:
       Version: 1.6.8
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!114 &1892671854224141158
-MonoBehaviour:
+--- !u!195 &3498749373804182740
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2603137418851068140}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startWhenEnabled: 1
-  asynchronousLoad: 0
-  pauseWhenDisabled: 0
-  restartWhenComplete: 0
-  logTaskChanges: 0
-  group: 0
-  resetValuesOnRestart: 0
-  externalBehavior: {fileID: 11400000, guid: 99ff5d2f3f7275444af8e82ce0d908f3, type: 2}
-  mBehaviorSource:
-    behaviorName: rabbit_2
-    behaviorDescription: 
-    mTaskData:
-      types: []
-      parentIndex: 
-      startIndex: 
-      variableStartIndex: 
-      JSONSerialization: 
-      fieldSerializationData:
-        typeName: []
-        fieldNameHash: 
-        startIndex: 
-        dataPosition: 
-        unityObjects: []
-        byteData: 
-        byteDataArray: 
-      Version: 
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
---- !u!114 &3938076424416466690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2603137418851068140}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startWhenEnabled: 1
-  asynchronousLoad: 0
-  pauseWhenDisabled: 0
-  restartWhenComplete: 0
-  logTaskChanges: 0
-  group: 0
-  resetValuesOnRestart: 0
-  externalBehavior: {fileID: 11400000, guid: 530631ad4e690c8468aebaa35b4b69a6, type: 2}
-  mBehaviorSource:
-    behaviorName: rabbit_3
-    behaviorDescription: 
-    mTaskData:
-      types: []
-      parentIndex: 
-      startIndex: 
-      variableStartIndex: 
-      JSONSerialization: 
-      fieldSerializationData:
-        typeName: []
-        fieldNameHash: 
-        startIndex: 
-        dataPosition: 
-        unityObjects: []
-        byteData: 
-        byteDataArray: 
-      Version: 
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
---- !u!114 &8823924292282936563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2603137418851068140}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87d0c6c4641c8d04c925853cdb75d1cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  behaviorTree: {fileID: 0}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2791013059688474060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +910,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2603137418851068131}
   m_RootOrder: 2
@@ -1063,6 +937,18 @@ PrefabInstance:
     - target: {fileID: 5484180133867135083, guid: 4035146e6d4ef694fa707542735154aa, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484180133867135083, guid: 4035146e6d4ef694fa707542735154aa, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484180133867135083, guid: 4035146e6d4ef694fa707542735154aa, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484180133867135083, guid: 4035146e6d4ef694fa707542735154aa, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5484180133867135083, guid: 4035146e6d4ef694fa707542735154aa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1103,6 +989,10 @@ PrefabInstance:
     - target: {fileID: 5484180133867135083, guid: 4035146e6d4ef694fa707542735154aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484180133867135083, guid: 4035146e6d4ef694fa707542735154aa, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4035146e6d4ef694fa707542735154aa, type: 3}

@@ -1,29 +1,22 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEditor;
 
-public class testTrigger : MonoBehaviour
+public class Cave : MonoBehaviour
 {
-
-    [SerializeField] private string Name;
-
-
-
-
+    public string Name;
 
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
         
-                
-                   
     }
 
     void OnTriggerEnter(Collider collider)
@@ -31,10 +24,10 @@ public class testTrigger : MonoBehaviour
         if(collider.name.Contains(Name))
         {
             collider.gameObject.layer = 31;
-            Renderer colliRenderer = collider.GetComponent<Renderer>();
-            colliRenderer.enabled = false;
 
-            Debug.Log("rabbit is in");
+            // สลับ layer ให้น้อยลง
+            //Renderer colliRenderer = collider.GetComponent<Renderer>();
+            //colliRenderer.enabled = false;            
         }
 
 
@@ -44,11 +37,10 @@ public class testTrigger : MonoBehaviour
         if (other.name.Contains(Name))
         {
             other.gameObject.layer = 7;
-            Renderer otherRenderer = other.GetComponent<Renderer>();
-            otherRenderer.enabled = true;
 
-
-            Debug.Log("rabbit is out");
+            // สลับ layer ให้เท่าเดิม
+            //Renderer otherRenderer = other.GetComponent<Renderer>();
+            //otherRenderer.enabled = true;            
         }
     }
 

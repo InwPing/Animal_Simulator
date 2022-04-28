@@ -34,11 +34,11 @@ public class BoarAnimation : MonoBehaviour
     }
     private void Animation()
     {
-        var runCondition = (SharedBool)behaviorTree.GetVariable("IsRunning");
+        var runCondition = (SharedBool)GlobalVariables.Instance.GetVariable("BoarIsRunning");
         //Debug.Log(runCondition);
 
         ifRun = runCondition.Value;
-        Debug.Log(ifRun);
+        //Debug.Log(ifRun);
 
         if (transform.position.x == lastXVal) //Idle
         {
@@ -56,15 +56,18 @@ public class BoarAnimation : MonoBehaviour
             animator.SetBool("Idle", false);
             animator.SetBool("Run", false);
             animator.SetBool("Walk", true);
-            lastXVal = transform.position.x;
+            
 
             //Debug.Log(ifRun);
-            /*if (ifRun == true) // วิ่งขวา
+            if (ifRun == true) // วิ่งขวา
             {
                 animator.SetBool("Idle", false);
                 animator.SetBool("Run", true);
                 animator.SetBool("Walk", false);
-            }*/
+            }
+
+            
+            lastXVal = transform.position.x;
         }
 
         else if (transform.position.x > lastXVal) //เดินขวา
@@ -75,23 +78,22 @@ public class BoarAnimation : MonoBehaviour
             animator.SetBool("Idle", false);
             animator.SetBool("Run", false);
             animator.SetBool("Walk", true);
-            lastXVal = transform.position.x;
+
 
             //Debug.Log(ifRun);
-            /*if (ifRun == true) // วิ่งซ้าย
+            if (ifRun == true) // วิ่งซ้าย
             {
                 animator.SetBool("Idle", false);
                 animator.SetBool("Run", true);
                 animator.SetBool("Walk", false);
-            }*/
+            }
 
+            lastXVal = transform.position.x;
         }
 
         if (enemy.currentHealth <= 0)
         {
             animator.SetBool("Die", true);
         }
-
-
     }
 }

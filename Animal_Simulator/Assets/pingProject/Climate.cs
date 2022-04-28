@@ -5,9 +5,9 @@ using UnityEngine;
 public class Climate : MonoBehaviour
 {
     [SerializeField] CheckAllAgent checkAllAgent;
-    [SerializeField] private float lastTemperature; //ร้อนจัด
-    [SerializeField] private float firstTemperature;
-    [SerializeField] private float SecondTemperature;
+     public float lastTemperature; //ร้อนจัด
+     private float firstTemperature;
+     private float SecondTemperature;
     [SerializeField] private float humidity;
 
     private float timePerMonth;
@@ -16,10 +16,9 @@ public class Climate : MonoBehaviour
 
 
     private int x;
-    //public string[] rainRate;
     private int newRate;
     private int lastRate;
-    //[SerializeField] int randomNum;
+
 
     private int gamrMonth = 1;
     private int gameYear = 1;   
@@ -36,6 +35,7 @@ public class Climate : MonoBehaviour
 
     private float oldA;
 
+    public int Hour;
     void Start()
     {
         //rainRate = new string[10];
@@ -90,9 +90,14 @@ public class Climate : MonoBehaviour
     }
 
     void Humidity() // ความชื้นในอากาส
-    {        
-        treeRatio = (float)(checkAllAgent.Tree / checkAllAgent.maxTree) * 100f;
-        humidity = treeRatio * 0.1f; // ค่าความชื้นในอากาศ 1 - 10
+    {   
+        if (checkAllAgent.Tree != 0)
+        {
+            treeRatio = (float)(checkAllAgent.Tree / checkAllAgent.maxTree) * 100f;
+            humidity = treeRatio * 0.1f; // ค่าความชื้นในอากาศ 1 - 10
+        }
+        else return;
+        
     }
     void TemperaturePerMonth() 
     {

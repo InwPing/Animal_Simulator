@@ -17,28 +17,23 @@ public class WolfAnimation : MonoBehaviour
         enemy = GetComponent<Enemy>();
         GameObject a = this.gameObject.transform.GetChild(0).gameObject;
         animator = a.GetComponent<Animator>();
-
-
     }
     void Start()
     {
         lastXVal = transform.position.x;
-
-        //GlobalVariables.Instance.SetVariable("isRunning", true);
     }
 
-    // Update is called once per frame
     void Update()
     {
         Animation();
     }
     private void Animation()
     {
-        var runCondition = (SharedBool)behaviorTree.GetVariable("IsRunning");
+        var runCondition = (SharedBool)GlobalVariables.Instance.GetVariable("WolfIsRunning");
         //Debug.Log(runCondition);
 
         ifRun = runCondition.Value;
-        Debug.Log(ifRun);
+        //Debug.Log(ifRun);
 
         if (transform.position.x == lastXVal) //Idle
         {
@@ -56,15 +51,16 @@ public class WolfAnimation : MonoBehaviour
             animator.SetBool("Idle", false);
             animator.SetBool("Run", false);
             animator.SetBool("Walk", true);
-            lastXVal = transform.position.x;
+            
 
             //Debug.Log(ifRun);
-            /*if (ifRun == true) // วิ่งขวา
+            if (ifRun == true) // วิ่งขวา
             {
                 animator.SetBool("Idle", false);
                 animator.SetBool("Run", true);
                 animator.SetBool("Walk", false);
-            }*/
+            }
+            lastXVal = transform.position.x;
         }
 
         else if (transform.position.x > lastXVal) //เดินขวา
@@ -75,23 +71,20 @@ public class WolfAnimation : MonoBehaviour
             animator.SetBool("Idle", false);
             animator.SetBool("Run", false);
             animator.SetBool("Walk", true);
-            lastXVal = transform.position.x;
 
             //Debug.Log(ifRun);
-            /*if (ifRun == true) // วิ่งซ้าย
+            if (ifRun == true) // วิ่งซ้าย
             {
                 animator.SetBool("Idle", false);
                 animator.SetBool("Run", true);
                 animator.SetBool("Walk", false);
-            }*/
-
+            }
+            lastXVal = transform.position.x;
         }
 
         if (enemy.currentHealth <= 0)
         {
             animator.SetBool("Die", true);
         }
-
-
     }
 }

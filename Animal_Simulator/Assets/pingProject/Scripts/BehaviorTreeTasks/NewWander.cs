@@ -16,7 +16,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         public SharedFloat wanderRate = 2;
         public SharedFloat minPauseDuration = 0;
         public SharedFloat maxPauseDuration = 0;
-
+        public float pauseTime;
 
         private Animator animator;
         private float lastXVal;
@@ -24,7 +24,10 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         private bool randomPos = false;
         private bool randomTime = false;
         private Vector3 newPos;
-        public float pauseTime;
+        private Vector3 direction;
+        private Vector3 destination;
+
+        public SharedBool findNewPos = false;
 
         public override void OnAwake()
         {
@@ -34,12 +37,11 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         public override void OnStart()
         {
             lastXVal = transform.position.x;
-            //_animator = gameObject.GetComponent<Animator>();
         }
 
         public override TaskStatus OnUpdate()
         {
-            //Animation();
+ 
             if (maxPauseDuration.Value > 0)
             {
                 if (randomTime == false)
@@ -55,16 +57,14 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
                     {
                         if (randomPos == false)
                         {
-                            newPos = Random.insideUnitSphere * wanderRate.Value;
-                            newPos.y = 0;
-                            Debug.Log(newPos);
+                            randomPosition();
                             randomPos = true;
 
                         }
-                        if (randomPos == true)
+                        else if (randomPos == true)
                         {
-                            transform.position = Vector3.MoveTowards(transform.position, newPos, speed.Value * Time.deltaTime);
-                            if (transform.position == newPos)
+                            walkToPos();
+                            if (transform.position == destination)
                             {
                                 randomPos = false;
                                 randomTime = false;
@@ -74,53 +74,50 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
                 }
 
             }
-            else
+            else if (maxPauseDuration.Value <= 0)
             {
+                if (findNewPos.Value == true)
+                {
+                    randomPosition();
+                    randomPos = false;
+                    findNewPos.Value = false;
+                    //Debug.Log("aaaaaaaaaaaaaaaaaaaaaaa");
+                }
+
                 if (randomPos == false)
                 {
-                    newPos = Random.insideUnitSphere * 10;
-                    newPos.y = 0;
-                    Debug.Log(newPos);
+                    randomPosition();
                     randomPos = true;
-
+                    //Debug.Log("bbbbbbbbbbbbbbbbbbbbbbbb");
                 }
 
-                if (randomPos == true)
+                else if (randomPos == true)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, newPos, speed.Value * Time.deltaTime);
-                    if (transform.position == newPos)
+                    walkToPos();
+                    if (transform.position == destination)
                     {
                         randomPos = false;
+                        return TaskStatus.Success;
+                        //Debug.Log("CCCCCCCCCCCCCCCCCCCCCCCCCCC");
                     }
                 }
-            }                      
+            }           
             return TaskStatus.Running;
         }
 
-        /*private void Animation()
+        void randomPosition()
         {
-            if (transform.position.x < lastXVal) //เดินซ้าย
-            {
-                animator.SetBool("IsRabbitWalkRight", false);
-                animator.SetBool("IsRabbitWalkLeft", true);
-                lastXVal = transform.position.x;
-            }
+            direction = transform.forward;
+            direction = direction + Random.insideUnitSphere * wanderRate.Value;            
+            //Debug.Log(newPos);
+        }
 
-            else if (transform.position.x > lastXVal) //เดินขวา
-            {
-                animator.SetBool("IsRabbitWalkRight", true);
-                animator.SetBool("IsRabbitWalkLeft", false);
-                lastXVal = transform.position.x;
-            }
-            else if (transform.position.x == lastXVal)
-            {
-                animator.SetBool("IsRabbitWalkRight", false);
-                animator.SetBool("IsRabbitWalkLeft", false);
-                lastXVal = transform.position.x;
-            }
-        }*/
-
-        // Reset the public variables
+       void walkToPos()
+        {
+            destination = transform.position;
+            destination = transform.forward + direction.normalized * Random.Range(minWanderDistance.Value, maxWanderDistance.Value); // เดินไปทิศนั้น
+            destination.y = 0;
+        }
         public override void OnReset()
         {
             minWanderDistance = 20;

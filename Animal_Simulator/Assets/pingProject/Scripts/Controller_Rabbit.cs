@@ -9,79 +9,43 @@ public class Controller_Rabbit: MonoBehaviour
 {
 
     [SerializeField] Enemy enemy;
-    //[SerializeField] Climate climate;
-    //[SerializeField] RabbitBuildCave RabbitBuildCave;
 
-    //private GameObject cavePrefab;
-    //public float caveDistance;
-    //public LayerMask enemyLayers;
 
     void Start()
     {
         BehaviorTree[] behaviorTree = GetComponents<BehaviorTree>();
         behaviorTree[0].enabled = false;
         behaviorTree[1].enabled = false;
-        behaviorTree[2].enabled = false;
-        behaviorTree[3].enabled = false;
+
     }
 
     void Update()
     {
-        ControlRabbit();
-    }
-
-    void ControlRabbit()
-    {
         BehaviorTree[] behaviorTree = GetComponents<BehaviorTree>();
-        
 
-        if (enemy.currentHungryPoint >= 0.9f * enemy.maxHungryPoint)
+        if (gameObject.layer == 31)
         {
-            // idle
-            behaviorTree[0].enabled = true;
-        }
-
-        if (enemy.currentHungryPoint < 0.9f * enemy.maxHungryPoint)
-        {
-            // wander , follow sameTag
             behaviorTree[0].enabled = false;
-            behaviorTree[1].enabled = true;
-
-        }
-        if (enemy.currentHungryPoint < 0.8f * enemy.maxHungryPoint)
-        {
-            //หิว
             behaviorTree[1].enabled = false;
             behaviorTree[2].enabled = true;
+
         }
-        if (enemy.currentHealth < 0.9f * enemy.maxHungryPoint)
+        else if(gameObject.layer != 31)
         {
-            // วิ่งเข้าโพลง
             behaviorTree[2].enabled = false;
-            behaviorTree[3].enabled = true;
-        }
-        
-    }
-
-    /*void buildCave() // ยังไม่เสด
-    {
-        Vector3 thisObjPos = transform.position;
-        Collider[] Caves = Physics.OverlapSphere(thisObjPos, caveDistance, enemyLayers);
-        foreach (Collider cave in Caves)
-        {
-            if (cave.name != "RabbitCave")
+            if (enemy.currentHungryPoint >= 0.8f * enemy.maxHungryPoint)
             {
-                GameObject X = (GameObject)Instantiate(cavePrefab);
-                X.transform.position = thisObjPos;
-                StartCoroutine(Delay());
-
-                Debug.Log("build cave");
+                // idle , wander , follow sameTag
+                behaviorTree[0].enabled = true;
+                behaviorTree[1].enabled = false;
             }
-        }
-    }*/
-    
-    public IEnumerator Delay()
-    {       
-        yield return new WaitForSeconds(2.0f);
+
+            if (enemy.currentHungryPoint < 0.8f * enemy.maxHungryPoint)
+            {
+                //หิว
+                behaviorTree[0].enabled = false;
+                behaviorTree[1].enabled = true;
+            }
+        }       
     }
 }

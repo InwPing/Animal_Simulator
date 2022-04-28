@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+
         gameObject.name = Name;
         currentHealth = maxHealth;
         currentHungryPoint = maxHungryPoint;    
@@ -36,7 +37,6 @@ public class Enemy : MonoBehaviour
 
     void Update() 
     {
-        //TimeClock();
         time += Time.deltaTime;
 
         floatTime += Time.deltaTime;
@@ -62,9 +62,8 @@ public class Enemy : MonoBehaviour
         if (currentHealth < 0)
         {
             currentHealth = 0;
-            StartCoroutine(DelayForSec());
-            //Destroy(gameObject);
-            //DropMeat();
+            Destroy(gameObject);
+            DropMeat();
         }
 
     }
@@ -84,12 +83,6 @@ public class Enemy : MonoBehaviour
     void Hungry()
     {
         currentHungryPoint -= 1;
-        if (currentHungryPoint <= 0)
-        {
-            currentHungryPoint = 0;
-            StartCoroutine(DelayForSec());
-            //Destroy(gameObject);
-        }
     }
 
     void DropMeat()
@@ -101,39 +94,6 @@ public class Enemy : MonoBehaviour
             rawMeat.transform.position = new Vector3(Random.Range(thisPosition.x + 2, thisPosition.x - 2), 0.5f, Random.Range(thisPosition.z + 2, thisPosition.z - 2));
         }
     }
-
-    /*void Sex()
-    {
-        if (Clock == true)
-        {
-            int randomGenerate = Random.Range(minRandom, maxRandom);
-            Vector3 thisPos = transform.position;
-            if (countEat >= conditionSex)
-            {
-                for (int i = 0; i < randomGenerate; i++)
-                {
-                    countEat = 0;
-
-                    GameObject O = (GameObject)Instantiate(gameObject);
-                    O.transform.position = thisPos;
-
-                    Clock = false;
-                }
-            }
-        }        
-    }
-    
-    void TimeClock()
-    {
-        timeClock += Time.deltaTime;
-        if (timeClock >= timeReadyForSex)
-        {
-            Clock = true;
-            Sex();
-            timeClock = 0.0f;
-        }
-        //else Clock = false;
-    }*/
 
     public void CounterAttack(GameObject Attacker)
     {
@@ -149,12 +109,6 @@ public class Enemy : MonoBehaviour
         else return;
     }
 
-    public IEnumerator DelayForSec()
-    {      
-        yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
-        DropMeat();
-    }
 
     /*void OnDrawGizmosSelected()
     {
